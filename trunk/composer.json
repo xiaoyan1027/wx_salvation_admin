@@ -1,0 +1,16 @@
+{
+  "name":"LPHP",
+  "description":"PHP Framework",
+  "type":"Framework",
+  "keywords":["php","PHP Framework","LPHP"],
+  "require":{
+      "filp/whoops":"*",
+      "symfony/var-dumper":"<=3.0.4"
+  },
+  "repositories": {
+    "packagist": {
+      "type": "composer",
+      "url": "https://packagist.phpcomposer.com"
+    }
+  }
+}

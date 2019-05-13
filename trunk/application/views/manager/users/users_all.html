@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--{include file="common/head.html"}-->
+    <!--{include file="common/main_header.html"}-->
+    <!--{include file="common/main_sidebar.html"}-->
+</head>
+<link href="/resources/js/searchableselect/jquery.searchableSelect.css" rel="stylesheet" type="text/css">
+<script src="/resources/js/searchableselect/jquery.searchableSelect.js"></script>
+
+<body class="hold-transition skin-green sidebar-mini">
+<div class="wrapper">
+
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                账号列表
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="box box-success">
+                        <div class="panel-heading clearfix">
+                            <form name="frm" action="./index" method="get" class="form-search form-inline">
+                                用户名:<input type="text" name="user_name" value="<!--{$smarty.get.user_name}-->" class="fl form-control w130 mr10"/>
+                                邮箱:<input type="text" name="email" value="<!--{$smarty.get.email}-->" class="fl form-control w130 mr10"/>
+                                电话:<input type="text" name="mobile" value="<!--{$smarty.get.mobile}-->" class="fl form-control w130 mr10"/>
+
+                                <button type="submit" class="btn bg-olive margin">搜索</button>
+                            </form>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="box box-warning">
+                        <!--<div class="box-header">-->
+                        <!--<h3 class="box-title">Hover Data Table</h3>-->
+                        <!--</div>-->
+                        <div class="box-body">
+                            <div class="dataTables_wrapper form-inline dt-bootstrap">
+                                <table id="example2" class="table  table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>用户名</th>
+                                        <th>手机</th>
+                                        <th>企业</th>
+                                        <th>集团</th>
+                                        <th>类型</th>
+                                        <th>帐号状态</th>
+                                        <th>最后登录时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!--{foreach from=$list item=row}-->
+                                    <tr>
+                                        <td><!--{$row.admin_uid}--></td>
+                                        <td><!--{$row.user_name}--></td>
+                                        <td><!--{$row.mobile}--></td>
+                                        <td><!--{$row.customer.customer_name}--></td>
+                                        <td><!--{$row.group.group_name}--></td>
+                                        <td><!--{$account_type_set[$row.account_type]}--></td>
+                                        <td><!--{if $row.status eq 1}-->使用中<!--{elseif $row.status eq 3}-->已关闭<!--{/if}--></td>
+                                        <td><!--{$row.last_login}--></td>
+                                        <td>
+                                            <a href="./set_persion?user_id=<!--{$row.admin_uid}-->&account_type=<!--{$row.account_type}-->&mobile=<!--{$row.mobile}-->">配置权限</a>
+                                        </td>
+                                    </tr>
+                                    <!--{/foreach}-->
+                                </table>
+                                <div class="box-footer  text-center"><!--{$pager_html}--></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!--{include file="common/main_footer.html"}-->
+    <div class="control-sidebar-bg"></div>
+</div>
+</body>
+</html>
+

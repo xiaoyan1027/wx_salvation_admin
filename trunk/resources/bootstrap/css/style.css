@@ -1,0 +1,18 @@
+
+/*黑色*/
+.y_man{width:76px;height: 60px;float: left;background: url(../images/b_man.png) no-repeat;}
+
+/*蓝色*/
+.y_header .y_logo,.y_header .y_con a{background: url(../images/y_pic.png) no-repeat;}
+.y_header{height:60px;background: url(../images/blue_bg.png) repeat-x 0 0;border-left:1px solid #2d88d6;border-right: 1px solid #2d88d6;position: relative;padding-right: 32px;font-family: "\5FAE\8F6F\96C5\9ED1";}
+.y_header .y_logo{position: absolute;top: 15px;left:30px;width:49px;height: 30px;background-position:-240px 0;}
+.y_header h1{position: absolute;height:60px;min-width:360px;line-height: 60px;left: 92px;font-size: 20px;color: #fff;text-shadow: 0.5px 0.866px 2px rgb( 0, 0, 0 );margin: 0;}
+.y_header .y_con{float: right;display: inline;}
+.y_header .y_con h4{float: left;line-height: 60px;font-size:14px;color: #fff;margin:0 29px 0 0;}
+.y_header .y_con a.mana{width: 80px;height: 60px;float:left;background-position:0 0;}
+.y_header .y_con a.tuichu{width: 80px;height: 60px;float:left;background-position:-80px 0;}
+.y_header .y_con a.y_pass{width: 80px;height: 60px;float:left;background-position:-160px 0;}
+.y_nav{height:40px;background: #82c5e8;position: relative;overflow: hidden;font-family: "\5FAE\8F6F\96C5\9ED1";}
+.y_nav ul{margin: 0}
+.y_nav li{width: 122px;line-height: 40px;text-align: center;font-size: 14px;color: #fff;float: left;cursor: pointer;}
+.y_nav li.cur,.y_nav li:hover{line-height: 36px; background: #a6daf3;color: #0067a3;border-bottom: 4px solid #0067a3;}

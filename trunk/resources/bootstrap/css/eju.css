@@ -1,0 +1,80 @@
+@charset "utf-8";
+/* CSS Document */
+html,body{height:100%; /*overflow: visible;*/}
+body { background:#fff; font-family:"\5FAE\8F6F\96C5\9ED1";}
+.cell{display:table-cell;*display:inline-block;width:2000px;*width:auto}
+.header .logo, .header .quit, .header .password,
+.leftNav li a, .leftNav li.active a, .leftNav li.active ul li a,  .leftNav li.active ul li.active a, .loginLogo{ background:url(../images/eju_icon.png) no-repeat;}
+.mainBody{/*overflow: hidden;*/}
+
+.wrap{width:1000px; margin:0 auto;}
+.main {/*position:relative; min-height:100%;*/ position:absolute; left:0; top:99px; bottom:45px; width:100%;}
+.left{ position:absolute; width:230px; height:100%; background-color:#f2f2f2; left:0; bottom:0;}
+.right{ position:absolute; top:0; bottom:0; right:0; background-color:#fff; left:230px;}
+.right iframe{ width:99.9%; height:100%;}
+.rightMain{ position:absolute; width:100%; height:100%; overflow: hidden;}
+/*header*/
+.header{ position:relative; background-color:#2b2d32; height:60px; padding:0 20px 0 40px;}
+.header .logo{ float:left; width:50px; height:30px; margin-top:13px; margin-right:8px; background-position:-127px 0;}
+.header h1{ float:left; margin-bottom:0; margin-top:15px; font-size:20px; color:#b8b8b8; font-family:"\5FAE\8F6F\96C5\9ED1";}
+.header .userInfo{ float:left; font-size:14px; color:#626365; margin-right:10px; line-height:60px;max-width: 299px; overflow: hidden; height: 60px;}
+.header .userInfo em{ color:#f4712a;}
+.header .projectInfo{ float:left; width:180px; margin-right:35px; margin-top:13px; background-color:#242529; border:1px solid #383a3f; color:#73777d;}
+.header .quit, .header .password{float:left; width:63px; height:60px; background-position:0 0;}
+.header .password{ background-position:-63px 0;}
+/*Menu*/
+.ejuMenu{ position:relative; border-bottom:0; background-color:#3d4045; margin-bottom:1px; padding-left:20px;}
+.ejuMenu li a{ border-radius:0; border:0; color:#9aa2ae;}
+.ejuMenu li a:hover, .ejuMenu li.active a, .ejuMenu li.active a:hover{ background-color:transparent; color:#f4712a; border:0; }
+.ejuMenu li.active{ background:url(../images/menuarrow.png) center 34px no-repeat;}
+/*Nav*/
+.leftNav li a{ border-radius:0; background-color:transparent;  padding-left:44px; color:#999; background-position:-231px -61px;}
+.leftNav li.active a{ background-position:0 -61px; color:#999;}
+.leftNav li.active a:hover, .leftNav li a:hover{color:#4587f6}
+.leftNav li.active ul li a{ background-position:0 -103px; padding-left:66px; color:#333;}
+.leftNav li.active ul li a:hover{ background-position:-231px -103px;}
+.leftNav li.active ul li.active a{ background-position:0 -144px; color:#fff;}
+.leftNav li.active ul li a:hover .badge, .leftNav li.active ul li.active a .badge{ background-color:#fff; color:#4587f6;}
+/*right*/
+.rightCon{ padding:10px 20px;}
+.rightT2{ color:#333; font-size:18px; font-family:"\5FAE\8F6F\96C5\9ED1"; margin:0; margin-bottom:20px;}
+/*List*/
+.ejuList01 li{ float:left; width:100%; margin-top:15px;}
+.ejuList01 li input[type=file]{display:inline; float:none;}
+.ejuList01 li > span{float:left; width:120px; text-align:right; color:#666; line-height:32px;}
+.ejuList02 li{ margin-top:5px;}
+/*table*/
+.table th{ color:#999;}
+.table th, .table td{ text-align:center;}
+/*footer*/
+.footer{ position:absolute; width:100%; bottom:0; background-color:#3d4045; height:45px; padding-top:5px; text-align:center; color:#73777d; font-size:12px;}
+.footer p{ line-height:20px; margin:0;}
+.footer a{color:#73777d;}
+/*Login*/
+.loginBody{ background:url(../images/loginBody.png) repeat;}
+.loginBg{ background: url(../images/loginBg.png) top center repeat-x; height:611px; padding-top:155px;}
+.loginLogo{ margin:0 auto 55px; width:650px; height:81px; background-position:0 -186px; text-indent:-999%;}
+.login{ margin:0 auto; width:300px;}
+.login li{ margin-top:10px;}
+.login li input{width:300px; height:36px; line-height:36px; padding:0 15px; border-radius:18px; border:0; border-bottom:1px solid #5f8bce; -moz-box-shadow:inset 0 0 5px #3065b4; -webkit-box-shadow:inset 0 0 5px #3065b4;  box-shadow: inset 0 0 5px #3065b4; background-color:#3b6cb9; color:#98bded;}
+.loginBtn{ display:block; margin:20px auto 0; width:200px; height:46px; line-height:46px; background-color:#51c368; border-radius:5px; color:#fff; font-size:16px; font-family:"\5b8b\4f53"; text-align:center; font-weight:700; -moz-box-shadow: 0 3px 0 #1e9564; -webkit-box-shadow: 0 3px 0 #1e9564; box-shadow: 0 3px 0 #1e9564;}
+.loginBtn:hover{ color:#fff; text-decoration:none;}
+.loginFooter{ height:100px; color:#9aa3aa; text-align:center; font-size:12px; line-height:22px; margin-top:30px;}
+/*Cover*/
+h2{ margin-top:0;}
+.pagination{ margin:0;}
+/*Input*/
+.shortInput{ display:inline-block; width:100px; margin:0 10px 0 5px;}
+/*Width*/
+.w130{width:130px;}
+.w250{width:250px; display:inline-block;}
+/*other*/
+.pl100{ padding-left:100px;}
+.formFile{ float:left;}
+.radioEju + .radioEju, .checkboxEju + .checkboxEju{ margin-top:6px;}
+.lh32{ line-height:32px;}
+/* ph 0725 span */
+.clb{ clear:both;}
+/* color */
+.yxcolor_div{width:100px;height:100px;float:left;margin-right:20px;margin-top:10px;}
+.yxcolor_div div{width:80px;height:80px;}

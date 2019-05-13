@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--{include file="common/head.html"}-->
+</head>
+<body class="hold-transition skin-green sidebar-mini">
+<div class="wrapper">
+  <!--{include file="common/main_header.html"}-->
+  <!--{include file="common/main_sidebar.html"}-->
+   <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content">
+        <div class="row">
+        <div class="col-md-12">
+          <div class="box box-success direct-chat direct-chat-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">基础统计</h3>
+            </div>
+            <div class="box-body">
+              <div style="padding-top: 10px;">
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                  <a href="#">  
+                  <div class="info-box">
+                    <span class="info-box-icon bg-green"><i class="fa fa-bars"></i></span>
+        
+                    <div class="info-box-content">
+                      <span class="info-box-text">项目总数</span>
+                      <span class="info-box-number"><!--{$result.project_num}--></span>
+                    </div>
+        
+                  </div>
+                  </a>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                  <a href="#">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-green"><i class="fa fa-archive"></i></span>
+        
+                    <div class="info-box-content">
+                      <span class="info-box-text">企业客户总数</span>
+                      <span class="info-box-number"><!--{$result.enterprise_num}--></span>
+                    </div>
+                  </div>
+                  </a>
+                </div>
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                  <a href="#">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-green"><i class="fa fa-archive"></i></span>
+        
+                    <div class="info-box-content">
+                      <span class="info-box-text">自有客户总数</span>
+                      <span class="info-box-number"><!--{$result.have_num}--></span>
+                    </div>
+                  </div>
+                  </a>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                  <a href="#">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-green"><i class="fa fa-archive"></i></span>
+        
+                    <div class="info-box-content">
+                      <span class="info-box-text">集团客户总数</span>
+                      <span class="info-box-number"><!--{$result.customer_num}--></span>
+                    </div>
+                  </div>
+                  </a>
+                </div>
+                
+              
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                  <div class="info-box">
+                  <a href="#">
+                    <span class="info-box-icon bg-green"><i class="fa fa-google-plus"></i></span>
+        
+                    <div class="info-box-content">
+                      <span class="info-box-text">小程序总数</span>
+                      <span class="info-box-number"><!--{$result.small_app_num}--></span>
+                    </div>
+          
+                  </div>
+        
+                </div>
+                <div class="clearfix visible-sm-block"></div>
+        
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                  <a href="#">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-green"><i class="fa  fa-retweet"></i></span>
+        
+                    <div class="info-box-content">
+                      <span class="info-box-text">主体总数</span>
+                      <span class="info-box-number"><!--{$result.princi_num}--></span>
+                    </div>
+                  </div>
+                  </a>
+                </div>
+                
+               
+              </div>
+            </div>
+            
+          </div>
+          <!--/.direct-chat -->
+        </div>
+        <!--{if $result.show_log eq 'on'}-->
+        <div class="col-md-12">
+          <div class="box box-danger direct-chat direct-chat-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">异常统计</h3>
+            </div>
+            <div class="box-body">
+              <div style="padding-top: 10px;">
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <a href="#">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-red"><i class="fa fa-warning"></i></span>
+
+                    <div class="info-box-content">
+                      <span class="info-box-text">错误日志数</span>
+                      <span class="info-box-number"><!--{$result.log_api_num}--></span>
+                    </div>
+                  </div>
+                  </a>
+                </div>
+
+
+              </div>
+            </div>
+
+          </div>
+          <!--/.direct-chat -->
+        </div>
+        <!--{/if}-->
+        </div>
+    </section>
+  </div>  
+  <!--{include file="common/main_footer.html"}-->
+  <div class="control-sidebar-bg"></div>
+</div>
+</body>
+</html>

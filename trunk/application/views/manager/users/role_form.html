@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--{include file="common/head.html"}-->
+</head>
+<body class="hold-transition skin-green sidebar-mini">
+<div class="wrapper">
+
+    <!--{include file="common/main_header.html"}-->
+    <!-- Left side column. contains the logo and sidebar -->
+    <!--{include file="common/main_sidebar.html"}-->
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                <!--{if $act == 'edit' }-->修改<!--{else}-->添加<!--{/if}-->角色
+            </h1>
+        </section>
+
+    
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                   
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">基本信息</h3>
+                        </div>
+                        
+                        <form class="form-horizontal" action="./<!--{$act}-->" method="post"
+                              onsubmit="return validate_form('form')" id="form" name="form">
+                            <div class="box-body">
+                                <input type="hidden" name="id" value="<!--{$id}-->"/>
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label">角色名称：</label>
+                                    <div class="col-sm-10">
+                                        <input style="width:300px;" class="form-control" placeholder="" name="role_name" mod="isempty" msg="角色名不能为空" id="textfield" value='<!--{$info.role_name}-->' />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">角色描述：</label>
+
+                                    <div class="col-sm-10">
+                                        <input style="width:300px;" class="form-control" id="role_desc" name="role_desc" value='<!--{$info.role_desc}-->' />                                    </div>
+                                </div>
+                                
+                                <div class="box-footer">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label"></label>
+
+                                        <button type="button" class="btn btn-default" onclick="window.history.go(-1);">取消</button>
+                                        <button type="submit" class="btn btn-info center">提交</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                
+            </div>
+            
+        </section>
+       
+    </div>
+    <!-- /.content-wrapper -->
+    <!--{include file="common/main_footer.html"}-->
+    
+    <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+
+</body>
+</html>

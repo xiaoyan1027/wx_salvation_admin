@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html class="bootstrap-admin-vertical-centered">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap-theme.min.css">
+<script type="text/javascript" src="/resources/bootstrap/js/jquery-1.11.1.min.js"></script>
+<!-- Bootstrap Admin Theme -->
+<link rel="stylesheet" media="screen" href="/resources/bootstrap/css/bootstrap-admin-theme.css">
+
+<!-- Custom styles -->
+<style type="text/css">
+    .alert{
+        margin: 0 auto 20px;
+    }
+</style>
+
+<title><!--{$smarty.const.SITE_NAME}--></title>
+
+</head>
+    <body class="bootstrap-admin-without-padding">
+
+        <div class="container">
+            <div class="row">
+
+
+        <!--{if $login_num && $login_num.use_num<1}-->
+	        <div class="alert alert-warning" role="alert">
+                      <a class="close" data-dismiss="alert" href="#">&times;</a>
+		      <strong>警告!</strong> 密码错误次数超限，请稍后再试！
+		    </div>
+
+                <!--{else $login_num.fail_num>0}-->
+	        <div class="alert alert-info" role="alert">
+                    <a class="close" data-dismiss="alert" href="#">&times;</a>
+		      你还有<strong><!--{$login_num.use_num}--></strong>登录机会！
+		    </div>
+			<!--{/if}-->
+
+                    <form  class="bootstrap-admin-login-form" name="frm" action="/manager/login/index" method="post" onsubmit="return validate_form( 'frm', 1 );">
+                        <h1><strong><!--{$smarty.const.SITE_NAME}--></strong></h1>
+                        <div class="form-group">
+                            <input  class="form-control w250" type="text" name="user_name" mod="isempty" value="" msg="用户名不能为空!" placeholder="用户名">
+                        </div>
+                        <div class="form-group">
+                            <input  class="form-control w250" type="password" name="passwd" mod="isempty" value="" msg="密码不能为空!" placeholder="密码">
+                        </div>
+                        <div class="form-group">
+                            <input  class="form-control w250" type="text" id="verifycode" name="code" mod="isempty" value="" msg="验证码不能为空!" placeholder="验证码"><br/><img src="./verifycode?nc=1" id="yzm" style="cursor:pointer" onmouseup="RefreshImage()" alt="点击刷新" title="点击刷新"/>
+                        </div>
+                        <link href="../../resources/bootstrap/css/eju.css" rel="stylesheet" type="text/css"/>
+                        <button class="btn btn-lg btn-primary" type="submit">登录</button>
+                    </form>
+
+            </div>
+        </div>
+
+    <div class="wrap">
+            <div class="loginFooter">
+            Copyright © 1996-2013 SINA Corporation, All Rights Reserved<br />
+    乐居房产、家居产品用户服务、产品咨询购买、技术支持客服服务热线：400-606-6969
+        </div>
+    </div>
+
+        <script type="text/javascript">
+            $(function() {
+                // Setting focus
+                $('input[name="user_name"]').focus();
+
+                // Setting width of the alert box
+                var alert = $('.alert');
+                var formWidth = $('.bootstrap-admin-login-form').innerWidth();
+                var alertPadding = parseInt($('.alert').css('padding'));
+
+                if (isNaN(alertPadding)) {
+                    alertPadding = parseInt($(alert).css('padding-left'));
+                }
+
+                $('.alert').width(formWidth - 2 * alertPadding);
+            });
+        </script>
+
+        <script language="javascript" type="text/javascript">
+            function RefreshImage()
+            {
+                var el =document.getElementById("yzm");
+                el.src=el.src;
+            }
+        </script>
+        <script type="text/javascript" src="/resources/bootstrap/js/bootstrap.min.js"></script>
+    </body>
+
+
+</html>

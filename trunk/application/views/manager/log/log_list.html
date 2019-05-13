@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--{include file="common/head.html"}-->
+</head>
+<body class="hold-transition skin-green sidebar-mini">
+<div class="wrapper">
+
+    <!--{include file="common/main_header.html"}-->
+    <!-- Left side column. contains the logo and sidebar -->
+    <!--{include file="common/main_sidebar.html"}-->
+
+    <script type="text/javascript" src="/resources/js/datepicker/WdatePicker.js"></script>
+    <link href="/resources/css/ui.datepicker.css" rel="stylesheet" type="text/css" />
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                日志列表
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+
+                <div class="col-md-12">
+
+                <div class="col-xs-22">
+                    <div class="box box-success">
+                        <div class="box-header with-border">
+                        </div>
+
+                        <div class="panel-heading clearfix">
+                            <form method='get' id="log_search" action="?site=manager&ctl=log&act=index" name="log_search" class="form-search form-inline">
+                                <input type="text" name="operator"  placeholder="用户ID" id="" class="fl form-control w130 mr10" value="<!--{$smarty.get.operator}-->" size="10" />
+                                <input type="text" name="log_site"  placeholder="site" id=""  class="fl form-control w130 mr10" value="<!--{$smarty.get.log_site}-->" size="10" />
+                                <input type="text" name="log_ctl"  placeholder="controller" id=""  class="fl form-control w130 mr10" value="<!--{$smarty.get.log_ctl}-->" size="10" />
+                                <input type="text" name="log_act"  placeholder="action" id=""  class="fl form-control w130 mr10" value="<!--{$smarty.get.log_act}-->" size="10" />
+                                <input type="text" name="log_desc"  placeholder="desc" id=""  class="fl form-control w130 mr10" value="<!--{$smarty.get.log_desc}-->" size="10" />
+                                <input type="text" name="log_uri"  placeholder="uri" id=""  class="fl form-control w130 mr10" value="<!--{$smarty.get.log_uri}-->" size="10" />
+                                <br/>
+                                <input type="text" style='width:170px;' class="fl form-control w150 mr10" class="Wdate" name="start_time"  placeholder="日期" id=""   value="<!--{$smarty.get.start_time}-->" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" size="15" />
+                                <input type="text" style='width:170px;' class="fl form-control w150 mr10" class="Wdate" name="end_time"  placeholder="结束日期" id=""  value="<!--{$smarty.get.end_time}-->" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" size="15" />
+
+                                <input type='hidden' name='site' value="<!--{$site}-->">
+                                <input type='hidden' name='ctl' value="<!--{$ctl}-->">
+                                <input type='hidden' name='act' value="<!--{$act}-->">
+
+                                <button type="submit" class="btn bg-olive margin">搜索</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="box box-warning">
+                        <!--<div class="box-header">-->
+                            <!--<h3 class="box-title">Hover Data Table</h3>-->
+                        <!--</div>-->
+                        <div class="box-body">
+                            <table id="example2" class="table  table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="with-checkbox">ID</th>
+                                    <th>用户</th>
+                                    <th>site</th>
+                                    <th>controller</th>
+                                    <th>act</th>
+                                    <th>uri</th>
+                                    <th>时间</th>
+                                    <th>IP</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <!--{foreach from=$log_list item=item}-->
+                                <tr>
+                                    <td class="tc"><!--{$item.id}--></td>
+                                    <td><!--{$item.operator}--></td>
+                                    <td><!--{$item.site}--></td>
+                                    <td><!--{$item.ctl}--></td>
+                                    <td><!--{$item.act}--></td>
+                                    <td><!--{$item.uri}--></td>
+                                    <td><!--{$item.time|date_format:"%Y-%m-%d %H:%M:%S"}--></td>
+                                    <td><!--{$item.ip}--></td>
+                                    <td><a href='./detail?id=<!--{$item.id}-->'
+                                           class="btn"> 查看详情 </a></td>
+                                </tr>
+                                <!--{/foreach}-->
+                                <tfoot>
+                                <tr>
+                                    <th colspan="9"><!--{$pager_html}--></th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!--{include file="common/main_footer.html"}-->
+    <div class="control-sidebar-bg"></div>
+</div>
+</body>
+</html>

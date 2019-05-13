@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--{include file="common/head.html"}-->
+</head>
+<body class="hold-transition skin-green sidebar-mini">
+<div class="wrapper">
+
+    <!--{include file="common/main_header.html"}-->
+    <!-- Left side column. contains the logo and sidebar -->
+    <!--{include file="common/main_sidebar.html"}-->
+
+    <link href="/resources/css/ui.datepicker.css" rel="stylesheet" type="text/css"/>
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                controller列表
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+
+
+                    <div class="box box-success">
+                        <div class="panel-heading clearfix">
+                            <form method="get" action="" name="frm" class="form-search form-inline">
+                                <!--所属项目:-->
+                                <!--<select name="domain" class="fl form-control w130 mr10">-->
+                                    <!--<option value=''>请选择</option>-->
+                                    <!--&lt;!&ndash;{foreach from=$domain_list key=domain item=name}&ndash;&gt;-->
+                                    <!--<option value=&lt;!&ndash;{$domain}&ndash;&gt; &lt;!&ndash;{if $domain==$smarty.get.domain}&ndash;&gt;selected-->
+                                        <!--&lt;!&ndash;{/if}&ndash;&gt;>&lt;!&ndash;{$name}&ndash;&gt;</option>-->
+                                    <!--&lt;!&ndash;{/foreach}&ndash;&gt;-->
+                                <!--</select>-->
+                                所属组件:
+                                <select name="com_id" class="fl form-control w130 mr10">
+                                    <option value=''>请选择</option>
+                                    <!--{foreach from=$compose_list key=compose_id item=compose_name}-->
+                                    <option value=<!--{$compose_id}--> <!--{if $compose_id==$smarty.get.com_id}-->
+                                        selected<!--{/if}-->><!--{$compose_name}--></option>
+                                    <!--{/foreach}-->
+                                </select>
+                                <button type="submit" class="btn bg-olive margin">搜索</button>
+                            </form>
+                        </div>
+                    </div>
+
+
+                    <div class="box box-warning">
+                        <!--<div class="box-header">-->
+                        <!--<h3 class="box-title">Hover Data Table</h3>-->
+                        <!--</div>-->
+                        <div class="box-body">
+                            <table id="example2" class="table  table-hover">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>中文名称</th>
+                                    <th>英文名称</th>
+                                    <th>所属组件</th>
+                                    <th>排序</th>
+                                    <th>是否显示</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <!--{foreach from=$controller_list item=controller_list_info}-->
+                                <tr>
+                                    <td><!--{$controller_list_info.id}--></td>
+                                    <td style='text-align:left;'><!--{$controller_list_info.func_name_cn}--></td>
+                                    <td style='text-align:left;'><a
+                                            href='?site=<!--{$site}-->&ctl=<!--{$ctl}-->&act=method_list&controller_id=<!--{$controller_list_info.id}-->'>
+                                        <!--{$controller_list_info.func_name}--></a></td>
+                                    <td style='text-align:left;'>
+                                        <!--{$compose_list[$controller_list_info.compose_id]}--></td>
+                                    <td><!--{$controller_list_info.orderid}--></td>
+                                    <td><!--{if $controller_list_info.is_show=="Y"}-->是<!--{else}-->否<!--{/if}--></td>
+                                    <td>
+                                        <a href='./method_list?controller_id=<!--{$controller_list_info.id}-->'
+                                           class="btn">方法管理</a>
+                                        <a href='./update?controller_id=<!--{$controller_list_info.id}-->'
+                                           class="btn"><i class="icon-edit"></i>修改</a>
+                                        <a href='#'
+                                           onclick='del_controller("<!--{$ctl}-->", "<!--{$controller_list_info.id}-->")'
+                                           class="btn"><i class="icon-remove"></i>删除</a>
+                                        <!--{if $controller_list_info.func_name <> 'controller_rights'}-->
+                                        <!--{if $controller_list_info.is_show=="N"}-->
+                                        <a href='#'
+                                           onclick='hidden_controller("<!--{$ctl}-->", "<!--{$controller_list_info.id}-->", "<!--{$controller_list_info.func_name_cn}-->", "Y", "<!--{$controller_list_info.compose_id}-->")'
+                                           class="btn"> 显示</a>
+                                        <!--{elseif $controller_list_info.is_show=="Y"}-->
+                                        <a href='#'
+                                           onclick='hidden_controller("<!--{$ctl}-->", "<!--{$controller_list_info.id}-->", "<!--{$controller_list_info.func_name_cn}-->", "N", "<!--{$controller_list_info.compose_id}-->")'
+                                           class="btn"> 隐藏</a>
+                                        <!--{/if}-->
+                                        <!--{/if}-->
+                                    </td>
+                                </tr>
+                                <!--{/foreach}-->
+                                <tfoot>
+                                <tr>
+                                    <th colspan="9"><!--{$pager_html}--></th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!--{include file="common/main_footer.html"}-->
+    <div class="control-sidebar-bg"></div>
+</div>
+</body>
+</html>
+
+<script>
+    function del_controller(ctl, controller_id)
+    {
+        if (confirm('是否要删除此controller？'))
+        {
+            location.href = "./delete?controller_id=" + controller_id;
+        }
+    }
+    function  hidden_controller(ctl, controller_id, controller_name, is_show, compose_id)
+    {
+        var msg = '';
+        msg = (is_show == 'Y') ? '显示' : '隐藏';
+        if (confirm('是否要' + msg + '控制器：' + controller_name + '？'))
+        {
+            location.href = "./hidden?controller_id=" + controller_id + "&is_show=" + is_show + "&compose_id=" + compose_id;
+        }
+    }
+</script>

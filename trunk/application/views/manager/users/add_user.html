@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--{include file="common/head.html"}-->
+</head>
+<body class="hold-transition skin-green sidebar-mini">
+<div class="wrapper">
+
+    <!--{include file="common/main_header.html"}-->
+    <!-- Left side column. contains the logo and sidebar -->
+    <!--{include file="common/main_sidebar.html"}-->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                <!--{if $type == 'edit' }-->修改<!--{else}-->添加<!--{/if}-->管理员
+            </h1>
+        </section>
+
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">用户基本信息</h3>
+                        </div>
+                       
+                        <form class="form-horizontal" action="./<!--{$act}-->" method="post"
+                              onsubmit="return validate_form('form')" id="form" name="form">
+                              <input type="hidden" name='id' value="<!--{$id}-->">
+                              <input type="hidden" name='type' value="<!--{$type}-->">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label">管理员级别：</label>
+                                    <div class="col-sm-10">
+                                        <select class="fl form-control select2" style='width:300px;' name='status' mod='isempty' msg="请选择所属状态!">
+                                            <option selected="selected">请选择</option>
+                                            <!--{foreach from=$super key=key item=item}-->
+                                            <option value=<!--{$key}--> <!--{if $key==$info.is_super}-->selected<!--{/if}--> ><!--{$item}--></option>
+                                            <!--{/foreach}-->
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label">用户名：</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" style="width:300px;" class="form-control" name='user_name' id='' value='<!--{$info.user_name}-->' mod='isempty' msg="controller名称不能为空!">
+                                    </div>
+                                </div>
+                                <!--{if $type !== 'edit'}-->
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">密码：</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="password" style="width:300px;" class="form-control" name='passwd' id=''
+                                               value='<!--{$info.passwd}-->' mod='isempty' msg='compose中文名不能为空'>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">确认密码：</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="password" style="width:300px;" class="form-control" name='passwd_agen' id=''
+                                               value='<!--{$info.passwd}-->' mod='isempty' msg='compose中文名不能为空'>
+                                    </div>
+                                </div>
+                                <!--{/if}-->
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label">管理员性别：</label>
+                                    <div class="col-sm-10">
+                                        <select class="fl form-control select2" style='width:300px;' name='gender' mod='isempty' msg="请选择性别!">
+                                            <option value='男' selected="selected">男</option>
+                                            
+                                            <option value='女' <!--{if $info.gender eq '女'}--> selected="selected"<!--{/if}--> >女</option>
+                                           
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">真实姓名：</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" style="width:300px;" class="form-control" name='real_name' id=''
+                                               value='<!--{$info.real_name}-->' mod='isempty' msg='compose中文名不能为空'>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">手机号：</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" style="width:300px;" class="form-control" name='mobile' id=''
+                                               value='<!--{$info.mobile}-->' mod='isempty' msg='compose中文名不能为空'>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label">状态：</label>
+                                    <div class="col-sm-10">
+                                        <select class="fl form-control select2" style='width:300px;' name='status' mod='isempty' msg="请选择所属状态!">
+                                            <option selected="selected">请选择</option>
+                                            <!--{foreach from=$status key=key item=item}-->
+                                            <option value=<!--{$key}--> <!--{if $key==$info.status}-->selected<!--{/if}--> ><!--{$item}--></option>
+                                            <!--{/foreach}-->
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="box-footer">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label"></label>
+
+                                        <button type="button" class="btn btn-default" onclick="window.history.go(-1);">取消</button>
+                                        <button type="submit" class="btn btn-info center">提交</button>
+                                </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                
+            </div>
+            
+        </section>
+       
+    </div>
+    
+    <!--{include file="common/main_footer.html"}-->
+    <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--{include file="common/head.html"}-->
+</head>
+<body class="hold-transition skin-green sidebar-mini">
+<div class="wrapper">
+
+    <!--{include file="common/main_header.html"}-->
+    <!--{include file="common/main_sidebar.html"}-->
+
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                <!--{if $act == 'update' }-->修改<!--{else}-->添加<!--{/if}-->任务
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Horizontal Form -->
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">基本信息</h3>
+                        </div>
+
+                        <!--{if $act == 'update'}-->
+                        <div class="box-header with-border">
+                            <p class="bg-warning">url: <!--{$url}-->index/index?id=<!--{$cron_info.id}--><!--{$cron_info.params}-->&token=<!--{$cron_info.token}--></p>
+                            <p class="bg-info"> cron: <!--{$cron_info.minute}-->  <!--{$cron_info.hour}-->
+                                <!--{$cron_info.dom}-->  <!--{$cron_info.month}-->  <!--{$cron_info.dow}-->   curl <!--{$url}-->index/index?id=<!--{$cron_info.id}--><!--{$cron_info.params}-->&token=<!--{$cron_info.token}-->
+                            </p>
+                        </div>
+                        <!--{/if}-->
+
+                        <form class="form-horizontal" action="./<!--{$act}-->?id=<!--{$cron_info.id}-->" method="post"
+                              onsubmit="return validate_form('form')" name="frm1" id="frm1">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">名称：</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" style="width:300px;" class="form-control" name="name"
+                                               mod="isempty" value='<!--{$cron_info.name}-->' msg="名称不能为空"
+                                               id="textfield">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">是否有守护进程：</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="radio" name="daemon_status" value="1"
+                                        <!--{if $cron_info.daemon_status eq 1 }-->checked<!--{/if}-->/>是
+                                        <input type="radio" name="daemon_status" value="0"
+                                        <!--{if $cron_info.daemon_status neq 1 }-->checked<!--{/if}-->/>否
+                                    </div>
+                                </div>
+
+                                
+
+                                <div class="form-group" id="">
+                                    <label class="col-sm-2 control-label">线程数量：</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" style="width:300px;" class="form-control" name="process_num"
+                                               maxlength='10' value='<!--{$cron_info.process_num|default:0}-->'>
+                                    </div>
+                                </div>
+
+                                <div id="time_set" <!--{if $cron_info.daemon_status eq 1}-->style="display:none;"
+                                <!--{/if}-->>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">分钟：</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" style="width:300px;" class="form-control" name="minute"
+                                               mod="isempty" msg="分钟不能为空" id="textfield" maxlength='10'
+                                               value='<!--{$cron_info.minute}-->'>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">小时：</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" style="width:300px;" class="form-control" name="hour"
+                                               value='<!--{$cron_info.hour}-->' mod="isempty" msg="小时不能为空"
+                                               id="textfield">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">日期：</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" style="width:300px;" class="form-control" name="dom"
+                                               value='<!--{$cron_info.dom}-->' mod="isempty" msg="日期不能为空"
+                                               id="textfield">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">月份：</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" style="width:300px;" class="form-control" name="month"
+                                               value='<!--{$cron_info.month}-->' mod="isempty" msg="月份不能为空"
+                                               id="textfield">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">星期：</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" style="width:300px;" class="form-control" name="dow"
+                                               mod="isempty" msg="星期不能为空" value='<!--{$cron_info.dow}-->'
+                                               id="textfield">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">命令：</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" style="width:300px;" class="form-control" name="command"
+                                           value='<!--{$cron_info.command}-->' mod="isempty" msg="命令不能为空"
+                                           id="textfield">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">执行控制器：</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" name="exec_mod" class="form-control" style='width:300px;'
+                                           value='<!--{$cron_info.exec_mod}-->' mod="isempty" msg="执行控制器不能为空"
+                                           id="textfield">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">执行方法：</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" name="exec_act" class="form-control" style='width:300px;'
+                                           value='<!--{$cron_info.exec_act}-->' mod="isempty" msg="执行控制器不能为空"
+                                           id="textfield">act名称，方法名
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">参数：</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" name="params" <!--{if $cron_info}--> disabled="disabled" <!--{/if}--> class="form-control" style='width:300px;'
+                                           value='<!--{$cron_info.params}-->'>格式:&name=test&pid=12
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">描述：</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" name="description" class="form-control" style='width:300px;'
+                                           value='<!--{$cron_info.description}-->' mod="isempty" msg="请添加描述"
+                                           id="textfield">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">任务状态：</label>
+
+                                <div class="col-sm-10">
+                                    <select class='fl form-control select2' style='width: 300px;' name="is_valid"
+                                            id="status" mod="isempty" msg="任务状态不能为空">
+
+                                        <option value="1" <!--{if $cron_info.is_valid eq 1}-->selected='selected'
+                                        <!--{/if}-->>可用</option>
+                                        <option value="0" <!--{if $cron_info.is_valid eq 0}-->selected='selected'
+                                        <!--{/if}-->>不可用</option>
+                                    </select></div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">是否允许手动执行：</label>
+
+                                <div class="col-sm-10">
+                                    <select name="manual_op" class='fl form-control select2' style='width: 300px;'
+                                            id="status" mod="isempty" msg="任务状态不能为空">
+                                        <option value="1" <!--{if $cron_info.manual_op eq 1}-->selected='selected'
+                                        <!--{/if}-->>可以</option>
+                                        <option value="0" <!--{if $cron_info.manual_op eq 0}-->selected='selected'
+                                        <!--{/if}-->>不可以</option>
+                                    </select></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">是否记录日志：</label>
+
+                                <div class="col-sm-10">
+                                    <select name="write_log" class='fl form-control select2' style='width: 300px;'
+                                            id="write_log">
+                                        <option value="No" <!--{if $cron_info.write_log eq 'No'}-->selected='selected'
+                                        <!--{/if}-->>不记录</option>
+                                        <option value="Yes" <!--{if $cron_info.write_log eq 'Yes'}-->selected='selected'
+                                        <!--{/if}-->>记录</option>
+                                    </select></div>
+                            </div>
+
+                            <div class="box-footer">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label"></label>
+
+                                    <button type="button" class="btn btn-default" onclick="window.history.go(-1);">取消
+                                    </button>
+                                    <button type="button" class="btn btn-info center"
+                                            onclick="validate_form( 'frm1', 1 )">提交
+                                    </button>
+                                </div>
+                            </div>
+                    </div>
+                    </form>
+                </div>
+
+            </div>
+            <!--/.col (right) -->
+    </div>
+    <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<!--{include file="common/main_footer.html"}-->
+<!-- Add the sidebar's background. This div must be placed
+     immediately after the control sidebar -->
+<div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+</body>
+</html>
+
+<script>
+    $(function () {
+        $("[name=daemon_status]").click(function () {
+            var status = $(this).val();
+            if (status == 1) {
+                $("#time_set").hide();
+            } else {
+                $("#time_set").show();
+            }
+        });
+    });
+</script>

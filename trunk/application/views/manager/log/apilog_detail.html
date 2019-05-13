@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--{include file="common/head.html"}-->
+</head>
+<body class="hold-transition skin-green sidebar-mini">
+<div class="wrapper">
+
+    <!--{include file="common/main_header.html"}-->
+    <!-- Left side column. contains the logo and sidebar -->
+    <!--{include file="common/main_sidebar.html"}-->
+
+   
+    <link href="/resources/css/ui.datepicker.css" rel="stylesheet" type="text/css" />
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                日志详情
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <div class="col-xs-22">
+                        <div class="box box-warning">
+                            <!--<div class="box-header">-->
+                            <!--<h3 class="box-title">Hover Data Table</h3>-->
+                            <!--</div>-->
+                            <div class="box-body">
+                                <table id="example2" class="table  table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>字段</th>
+                                        <th>值</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>ID：</td>
+                                        <td><!--{$log_info._id}--></td>
+                                    </tr>
+                                    <tr>
+                                        <td>请求方式：</td>
+                                        <td><!--{$log_info.request_method}--></td>
+                                    </tr>
+                                    <tr>
+                                        <td>请求地址：</td>
+                                        <td><!--{$log_info.request_url}--></td>
+                                    </tr>
+                                    <tr>
+                                        <td>请求状态：</td>
+                                        <td>
+                                            <!--{if $log_info.status==1}-->
+                                            成功
+                                            <!--{else}-->
+                                            失败
+                                            <!--{/if}-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>开始请求时间：</td>
+                                        <td><!--{$log_info.request_start_time|date_format:"%Y-%m-%d %H:%M:%S"}--></td>
+                                    </tr>
+                                    <tr>
+                                        <td>请求IP：</td>
+                                        <td><!--{$log_info.client_ip}--></td>
+                                    </tr>
+                                    <tr>
+                                        <td>耗时：</td>
+                                        <td><!--{$log_info.spend_time}-->ms</td>
+                                    </tr>
+                                    <tr>
+                                        <td>内存：</td>
+                                        <td><!--{$log_info.memory}--></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Site：</td>
+                                        <td><!--{$log_info.site}--></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Controller：</td>
+                                        <td><!--{$log_info.controller}--></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Action：</td>
+                                        <td><!--{$log_info.action}--></td>
+                                    </tr>
+                                    <tr>
+                                        <td>User Agent：</td>
+                                        <td><!--{$log_info.user_agent}--></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Refer：</td>
+                                        <td><!--{$log_info.refer}--></td>
+                                    </tr>
+
+                                    <!--{if $log_info.get_param}-->
+                                    <tr>
+                                        <td>GET参数：</td>
+                                        <td>
+                                            <textarea cols="80" rows="6"><!--{$log_info.get_param}--></textarea>
+                                        </td>
+                                    </tr>
+                                    <!--{/if}-->
+
+                                    <!--{if $log_info.post_param}-->
+                                    <tr>
+                                        <td>POST参数：</td>
+                                        <td>
+                                            <textarea cols="80" rows="6"><!--{$log_info.post_param}--></textarea>
+                                        </td>
+                                    </tr>
+                                    <!--{/if}-->
+                                    
+                                    <tr>
+                                        <td>数据：</td>
+                                        <td>
+                                            <textarea cols="80" rows="6"><!--{$log_info.data}--></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><button class="btn" type='button' onclick="window.location.href='./apilog_list'">返回</button></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+    </div>
+    <!--{include file="common/main_footer.html"}-->
+    <div class="control-sidebar-bg"></div>
+</div>
+</body>
+</html>

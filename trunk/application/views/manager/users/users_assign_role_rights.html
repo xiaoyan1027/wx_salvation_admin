@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--{include file="common/head.html"}-->
+    <!--{include file="common/main_header.html"}-->
+    <!--{include file="common/main_sidebar.html"}-->
+</head>
+<style>
+    .menu_list{margin-left:20px;display:none;}
+    .menu_list input{margin-right:2px;}
+    .list_h4{cursor:pointer;background-color:#eee; line-height:30px; font-size:15px;padding-left: 10px;clear:both;}
+    .list_h5{background-color:#f5f5f5;line-height:28px; font-size:14px;padding-left: 5px;font-weight: bold;clear:both;}
+    .unstyled{list-style: none;}
+    .unstyled{padding-left:20px; margin-bottom:50px;}
+    .unstyled label{font-weight: normal;}
+    .unstyled li{float:left;line-height: 28px; margin-right: 20px;}
+    .p5{clear:both;}
+</style>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                【<!--{$role_info.product_name}-->】角色权限分配
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                  <!-- Custom Tabs -->
+
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tab_1" data-toggle="tab">后台</a></li>
+                        </ul>
+                        <form name="frm" action="?site=<!--{$site}-->&ctl=<!--{$ctl}-->&act=<!--{$act}-->&id=<!--{$role_info.id}-->" method="post">
+                            <input type="hidden" name="no_use_value" value="1"/>
+                            <div class="tab-content" style="padding: 5px;">
+                                <div class="tab-pane active" id="tab_1">
+
+                                    <!--{foreach key=key item=item from=$permission_list}-->
+                                    <div class="p_group">
+                                        <h4 class="list_h4 p_group_title"><span>+</span>&nbsp;<!--{$item.name}--></h4>
+                                        <div class="menu_list">
+                                            <!--{foreach from=$item.children key=c_key item=c_item}-->
+                                            <div class="p_set">
+                                                <h5 class="list_h5"><span><input class="p_all" type="checkbox" value="<!--{$c_key}-->" class="vm"></span><!--{$c_item.name}--></h5>
+                                                <ul class="unstyled inline">
+                                                    <!--{foreach item=p_item key=p_key from=$c_item.children}-->
+                                                    <li><label><input name="rights[<!--{$key}-->][<!--{$c_key}-->][<!--{$p_key}-->]" class="p_action" type="checkbox" <!--{if isset($role_info.permission_set[$key][$c_key][$p_key])}-->checked<!--{/if}--> value=""></label>&nbsp;<!--{$p_item.name}--></li>
+                                                    <!--{/foreach}-->
+                                                </ul>
+                                            </div>
+                                            <!--{/foreach}-->
+                                        </div>
+                                    </div>
+                                    <!--{/foreach}-->
+
+                                </div>
+
+                                <div class="p5 tc">
+                                    <input type="submit" class="btn" value="保存" name="">
+                                    <input type="reset" class="btn" value="取消" name="" >
+                                </div>
+                            </div>
+
+                        </form>
+                        <!-- /.tab-content -->
+                    </div>
+
+                  
+                </div>
+            </div>
+        </section>
+    </div>
+    <!--{include file="common/main_footer.html"}-->
+    <div class="control-sidebar-bg"></div>
+</div>
+</body>
+</html>
+
+
+<script type="text/javascript">
+    
+   
+    //设置用户权限的选中
+
+    $(".p_group_title").click(function(){
+       var _this = this;
+       var _parent = $(_this).parents(".p_group");
+       var opt = $('span',_this).html();
+       if(opt == '+')
+       {
+            $(".menu_list",_parent).show();
+            $('span',_this).html("-");
+       }
+       else
+       {
+            $(".menu_list",_parent).hide();
+            $('span',_this).html("+");
+       }
+    });
+
+    $(".p_all").change(function(){
+        var _this = this;
+        var _parent = $(_this).parents(".p_set");
+        $("ul input:checkbox",_parent).prop("checked",$(_this).prop("checked"));
+    });
+    $(".p_action").change(function(){
+        var _this = this;
+        var _parent = $(_this).parents(".p_set");
+        if($(".p_action:checked",_parent).length == 0)
+        {
+            $(".p_all",_parent).prop("checked",false);
+        }
+        else
+        {
+            $(".p_all",_parent).prop("checked",true);
+        }
+    });
+    $(".p_action").change();
+</script>
+

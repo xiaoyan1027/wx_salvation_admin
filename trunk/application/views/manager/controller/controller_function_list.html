@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--{include file="common/head.html"}-->
+</head>
+<body class="hold-transition skin-green sidebar-mini">
+<div class="wrapper">
+
+    <!--{include file="common/main_header.html"}-->
+    <!-- Left side column. contains the logo and sidebar -->
+    <!--{include file="common/main_sidebar.html"}-->
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                <!--{$controller_info.func_name}-->方法列表
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <form method='post' action='./<!--{$act}-->?controller_id=<!--{$controller_info.id}-->' onsubmit = "return validate_form('form')" id="form" name="form">
+
+                    <!--{if $current_methods}-->
+
+                    <div class="box box-warning">
+                        <div class="box-header">
+                            <h3 class="box-title">方法列表</h3>
+                        </div>
+                        <div class="box-body">
+                            <table id="example2" class="table  table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="with-checkbox">ID</th>
+                                    <th>方法名称</th>
+                                    <th>功能名称(中文)</th>
+                                    
+                                    <th>排序</th>
+                                    <th>是否为菜单</th>
+                                    <th>是否为权限</th>
+                                </tr>
+                                </thead>
+                                <!--{foreach from=$current_methods item=method}-->
+                                <tr>
+                                    <td><!--{$method.id}--></td>
+                                    <td><!--{$method.func_name}--></td>
+                                    <td><input name='update_func_name_cn[<!--{$method.id}-->]'
+                                               value='<!--{$method.func_name_cn}-->' mod="isempty" msg="权限中文名不能为空!"
+                                               type="text" class="fl form-control w120 mr10" style="width:180px;"></td>
+                                    <td><input name='update_orderid[<!--{$method.id}-->]'
+                                               value='<!--{$method.orderid|default:0}-->'
+                                               type="text"  style="width: 40px;"></td>
+
+                                    <td>是<input name='update_is_menu[<!--{$method.id}-->]' value='1' type='radio'
+                                        <!--{if $method.is_menu == 1}-->checked<!--{/if}-->>&nbsp;&nbsp;否<input
+                                                name='update_is_menu[<!--{$method.id}-->]' value='0' type='radio'
+                                        <!--{if $method.is_menu != 1}-->checked<!--{/if}-->>
+                                    </td>
+                                    <td>是<input name='update_is_right[<!--{$method.id}-->]' value='1' type='radio'
+                                        <!--{if $method.is_right == 1}-->checked<!--{/if}-->>&nbsp;&nbsp;否<input
+                                                name='update_is_right[<!--{$method.id}-->]' value='0' type='radio'
+                                        <!--{if $method.is_right != 1}-->checked<!--{/if}-->>
+                                    </td>
+                                </tr>
+                                <!--{/foreach}-->
+                                <tfoot>
+                                <tr>
+                                    <th colspan="10"><!--{$pager_html}--></th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <!--{/if}-->
+
+                    <!--{if $new_methods}-->
+                    <div class="box box-warning">
+                        <div class="box-header">
+                            <h3 class="box-title">新增方法列表</h3>
+                        </div>
+                        <div class="box-body">
+                            <table id="example2" class="table  table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="with-checkbox">ID</th>
+                                    <th>方法名称</th>
+                                    <th>功能名称(中文)</th>
+                                    <th>展示类型</th>
+                                    <th>第三方外部链接</th>
+                                    <th>排序</th>
+                                    <th>是否为菜单</th>
+                                    <th>是否为权限</th>
+                                </tr>
+                                </thead>
+                                <!--{foreach from=$new_methods item=method}-->
+                                <tr>
+                                    <td></td>
+                                    <td><!--{$method}--></td>
+                                    <td><input name='add_func_name_cn[<!--{$method}-->]' value='' mod="isempty"
+                                               msg="权限中文名不能为空!" type="text" class="fl form-control w130 mr10" style="width:180px;"></td>
+                                    <td>
+                                        <select name="add_show_type[<!--{$method}-->]" class="fl form-control w130 mr10">
+                                                <option value="0">请选择</option>
+                                                <option value="1">直接渲染</option>
+                                                <option value="2">IFRAME嵌入</option>
+                                            </select>
+                                    </td>
+                                    <td><input name='add_page_url[<!--{$method}-->]' value=''
+                                               type="text" class="fl form-control w130 mr10" style="width:400px;"></td>
+                                    <td><input name='add_orderid[<!--{$method}-->]'
+                                               value='0'
+                                               type="text" class="fl form-control w130 mr10" style="width: 40px;"></td>
+                                    <td>是<input name='add_is_menu[<!--{$method}-->]' value='1' type='radio'>&nbsp;&nbsp;
+                                        否<input name='add_is_menu[<!--{$method}-->]' value='0' type='radio' checked>
+                                    </td>
+                                    <td>是<input name='add_is_right[<!--{$method}-->]' value='1' checked type='radio'>&nbsp;&nbsp;
+                                        否<input name='add_is_right[<!--{$method}-->]' value='0' type='radio'></td>
+                                </tr>
+                                <!--{/foreach}-->
+                                <tfoot>
+                                <tr>
+                                    <th colspan="9"><!--{$pager_html}--></th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <!--{/if}-->
+
+                    <!--{if $past_methods}-->
+                    <div class="box box-warning">
+                        <div class="box-header">
+                            <h3 class="box-title">曾用方法列表</h3>
+                        </div>
+                        <div class="box-body">
+                            <table id="example2" class="table  table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="with-checkbox">ID</th>
+                                    <th>方法名称</th>
+                                    <th>功能名称(中文)</th>
+                                    <th>是否为菜单</th>
+                                    <th>是否为权限</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <!--{foreach from=$past_methods item=method}-->
+                                <tr>
+                                    <td><!--{$method.id}--></td>
+                                    <td><!--{$method.func_name}--></td>
+                                    <td><input name='update_func_name_cn[<!--{$method.id}-->]'
+                                               value='<!--{$method.func_name_cn}-->'></td>
+                                    <td>是<input name='update_is_menu[<!--{$method.id}-->]' value='1' type='radio'
+                                        <!--{if $method.is_menu == 1}-->checked<!--{/if}-->>&nbsp;&nbsp;
+                                        否<input name='update_is_menu[<!--{$method.id}-->]' value='0' type='radio'
+                                        <!--{if $method.is_menu != 1}-->checked<!--{/if}-->>
+                                    </td>
+                                    <td>是<input name='update_is_right[<!--{$method.id}-->]' value='1' type='radio'
+                                        <!--{if $method.is_right == 1}-->checked<!--{/if}-->>&nbsp;&nbsp;
+                                        否<input name='update_is_right[<!--{$method.id}-->]' value='0' type='radio'
+                                        <!--{if $method.is_right != 1}-->checked<!--{/if}-->>
+                                    </td>
+                                    <td><a href='#'
+                                           onclick='del_function("<!--{$ctl}-->", "<!--{$controller_info.id}-->", <!--{$method.id}-->)'
+                                           class="btn"><i class="icon-remove"></i>删除</a></td>
+                                </tr>
+                                <!--{/foreach}-->
+                                <tfoot>
+                                <tr>
+                                    <th colspan="9"><!--{$pager_html}--></th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <!--{/if}-->
+
+
+                    <div>
+
+                        <div class="box-body">
+                            <table id="example2" class="table  table-hover">
+                                <tfoot>
+                                <tr>
+                                    <td colspan="2">
+                                        <button type="button" class="btn btn-default" onclick="window.history.go(-1);">
+                                            取消
+                                        </button>
+                                        <button type="submit" class="btn btn-info center">提交
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!--{include file="common/main_footer.html"}-->
+    <div class="control-sidebar-bg"></div>
+</div>
+</body>
+</html>
+
+<script>
+    function del_function(ctl, controller_id, id) {
+        if (confirm('是否要删除此方法？')) {
+            location.href = "./delete_method?controller_id=" + controller_id + "&id=" + id;
+        }
+    }
+</script>

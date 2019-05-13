@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--{include file="common/head.html"}-->
+</head>
+<body class="hold-transition skin-green sidebar-mini">
+<div class="wrapper">
+
+    <!--{include file="common/main_header.html"}-->
+    <!-- Left side column. contains the logo and sidebar -->
+    <!--{include file="common/main_sidebar.html"}-->
+
+    <script type="text/javascript" src="/resources/js/datepicker/WdatePicker.js"></script>
+    <link href="/resources/css/ui.datepicker.css" rel="stylesheet" type="text/css" />
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                mongo日志列表
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+
+                <div class="col-md-12">
+
+                <div class="col-xs-22">
+                    <div class="box box-success">
+                        <div class="box-header with-border">
+                        </div>
+
+                        <div class="panel-heading clearfix">
+                            <form method='get' id="log_search" action="./system_log" name="log_search" class="form-search form-inline">
+                                <select name="domain" class="fl form-control w130 mr10">
+                                    <option value="" <!--{if $smarty.get.domain == ''}-->selected<!--{/if}-->>全部</option>
+                                    <!--{foreach from=$_mgbase_config.domain key=id item=name}-->
+                                    <option value="<!--{$id}-->" <!--{if $id==$smarty.get.domain}-->selected<!--{/if}-->><!--{$name}--></option>
+                                    <!--{/foreach}-->
+                                </select>
+                                <!--<select name="type_m" class="fl form-control w130 mr10">-->
+                                    <!--&lt;!&ndash;{foreach from=$_mgbase_config.type key=id item=name}&ndash;&gt;-->
+                                    <!--<option value="&lt;!&ndash;{$name}&ndash;&gt;" &lt;!&ndash;{if $name==$smarty.get.type_m}&ndash;&gt;selected&lt;!&ndash;{/if}&ndash;&gt;>&lt;!&ndash;{$name}&ndash;&gt;</option>-->
+                                    <!--&lt;!&ndash;{/foreach}&ndash;&gt;-->
+                                <!--</select>-->
+                                <select name="level" class="fl form-control w130 mr10">
+                                    <option value="" <!--{if $smarty.get.level == ''}-->selected<!--{/if}-->>全部</option>
+                                    <!--{foreach from=$_mgbase_config.level key=id item=name}-->
+                                    <option value="<!--{$id}-->" <!--{if $id==$smarty.get.level}-->selected<!--{/if}-->><!--{$name}--></option>
+                                    <!--{/foreach}-->
+                                </select>
+                                上个月数据&nbsp;&nbsp;&nbsp;<input type="radio" name='time' value="1"<!--{if $smarty.get.time==1}--> checked<!--{/if}-->/>是
+                                <button type="submit" class="btn bg-olive margin">搜索</button>
+                        </div>
+                        <input type='hidden' name='tj' value="1">
+                        <input type='hidden' name='site' value="<!--{$site}-->">
+                        <input type='hidden' name='ctl' value="<!--{$ctl}-->">
+                        <input type='hidden' name='act' value="<!--{$act}-->">
+
+                        </form>
+                        </div>
+                    </div>
+
+                    <div class="box box-warning">
+                        <!--<div class="box-header">-->
+                            <!--<h3 class="box-title">Hover Data Table</h3>-->
+                        <!--</div>-->
+                        <div class="box-body">
+                            <table id="example2" class="table  table-hover">
+                                <thead>
+                                <tr>
+                                    <th>级别</th>
+                                    <th>消息</th>
+                                    <th>页面</th>
+                                    <th>域名</th>
+                                    <th>时间</th>
+                                </tr>
+                                </thead>
+                                <!--{foreach from=$list item=item}-->
+                                <tr>
+                                    <td><!--{$item.level}--></td>
+                                    <td style="width:600px;word-wrap:break-word; word-break:break-all;"><!--{$item.message}--></td>
+                                    <td style="width:600px;word-wrap:break-word; word-break:break-all;"><!--{$item.page_url}--></td>
+                                    <td><!--{$item.host}--></td>
+                                    <td><!--{$item.date}--></td>
+                                </tr>
+                                <!--{/foreach}-->
+                                <tfoot>
+                                <tr>
+                                    <th colspan="9"><!--{$pager_html}--></th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!--{include file="common/main_footer.html"}-->
+    <div class="control-sidebar-bg"></div>
+</div>
+</body>
+</html>

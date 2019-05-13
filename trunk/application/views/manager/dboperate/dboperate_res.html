@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!--{include file="common/head.html"}-->
+</head>
+<body class="hold-transition skin-green sidebar-mini">
+<div class="wrapper">
+
+	<!--{include file="common/main_header.html"}-->
+	<!-- Left side column. contains the logo and sidebar -->
+	<!--{include file="common/main_sidebar.html"}-->
+
+	<link href="/resources/css/ui.datepicker.css" rel="stylesheet" type="text/css"/>
+
+	<div class="content-wrapper">
+		<section class="content-header">
+			<h1>
+				数据查询结果
+			</h1>
+		</section>
+
+		<!-- Main content -->
+		<section class="content">
+			<div class="row">
+				<div class="col-md-12">
+
+					<div class="box box-warning">
+						<!--<div class="box-header">-->
+						<!--<h3 class="box-title">Hover Data Table</h3>-->
+						<!--</div>-->
+						<div class="box-body">
+							<table id="example2" class="table  table-hover">
+
+								<!--{foreach from=$res item=result}-->
+								<tr >
+									<!--{foreach from=$result item=r}-->
+									<td bgcolor="#ffffff"><!--{$r}--></td>
+									<!--{/foreach}-->
+								</tr>
+								<!--{/foreach}-->
+
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<!--{include file="common/main_footer.html"}-->
+	<div class="control-sidebar-bg"></div>
+</div>
+</body>
+</html>

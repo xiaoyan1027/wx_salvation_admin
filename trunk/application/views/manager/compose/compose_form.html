@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--{include file="common/head.html"}-->
+</head>
+<body class="hold-transition skin-green sidebar-mini">
+<div class="wrapper">
+
+    <!--{include file="common/main_header.html"}-->
+    <!-- Left side column. contains the logo and sidebar -->
+    <!--{include file="common/main_sidebar.html"}-->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                <!--{if $act == 'update' }-->修改<!--{else}-->添加<!--{/if}-->组件
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Horizontal Form -->
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">基本信息</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        <form class="form-horizontal" action="./<!--{$act}-->?id=<!--{$compose_detail.id}-->" method="post"
+                              onsubmit="return validate_form('form')" id="form" name="form">
+                            <div class="box-body">
+
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label">所属项目:</label>
+                                    <div class="col-sm-10">
+                                        <select class="fl form-control select2" style='width:300px;' name='domain' mod='isempty' msg="请选择所属项目!">
+                                            <option selected="selected">请选择</option>
+                                            <!--{foreach from=$domain_list key=domain item=name}-->
+                                            <option value=<!--{$domain}--> <!--{if $domain==$compose_detail.domain}-->selected<!--{/if}-->><!--{$name}--></option>
+                                            <!--{/foreach}-->
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label">英文名称：</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" style="width:300px;" class="form-control" name='en_name' id=''
+                                               value='<!--{$compose_detail.en_name}-->' mod='isempty' msg="controller名称不能为空!">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">中文名称：</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" style="width:300px;" class="form-control" name='cn_name' id=''
+                                               value='<!--{$compose_detail.cn_name}-->' mod='isempty' msg='compose中文名不能为空'>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">排序：</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" style="width:300px;" class="form-control" name='orderid' id=''
+                                               value='<!--{$compose_detail.orderid|default:"0"}-->' mod='isempty' msg='排序字段不能为空'>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">图标：</label>
+
+                                    <div class="col-sm-10">
+                                            <input type="text" style="width:300px;" class="form-control" name='icon'
+                                                   value='<!--{$compose_detail.icon}-->'>
+                                    </div>
+                                </div>
+
+                                <div class="box-footer">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label"></label>
+
+                                        <button type="button" class="btn btn-default" onclick="window.history.go(-1);">取消</button>
+                                        <button type="submit" class="btn btn-info center">提交</button>
+                                </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <!--/.col (right) -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <!--{include file="common/main_footer.html"}-->
+    <!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+</body>
+</html>

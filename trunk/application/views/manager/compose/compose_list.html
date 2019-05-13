@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--{include file="common/head.html"}-->
+    <!--{include file="common/main_header.html"}-->
+    <!--{include file="common/main_sidebar.html"}-->
+</head>
+<body class="hold-transition skin-green sidebar-mini">
+<div class="wrapper">
+
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                组件列表
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+
+
+                    <div class="box box-success">
+                        <div class="panel-heading clearfix">
+                            <!--<a href="./add" class="btn"><i class="icon-plus"></i>添加组件</a>-->
+                            <!--<a href="javascript:location.reload()" class="btn"><i class="icon-refresh"></i>刷新</a>-->
+
+                            <form method="get" action="./index" name="frm" class="form-search form-inline">
+                                所属项目:
+                                <select name="domain" class="fl form-control w130 mr10">
+                                    <option value=''>请选择</option>
+                                    <!--{foreach from=$domain_list key=domain item=name}-->
+                                    <option value=<!--{$domain}--> <!--{if $domain==$smarty.get.domain}-->selected
+                                        <!--{/if}-->><!--{$name}--></option>
+                                    <!--{/foreach}-->
+                                </select>
+
+                                <button type="submit" class="btn bg-olive margin">搜索</button>
+                            </form>
+                        </div>
+                    </div>
+
+
+
+                <div class="box box-warning">
+                    <!--<div class="box-header">-->
+                    <!--<h3 class="box-title">Hover Data Table</h3>-->
+                    <!--</div>-->
+                    <div class="box-body">
+                        <table id="example2" class="table  table-hover">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>中文名称</th>
+                                <th>组件名称</th>
+                                <th>所属站点</th>
+                                <!--{if $smarty.get.order==1}-->
+                                <th><a href="./index?order=2&domain=<!--{$smarty.get.domain}-->">排序</a>↑</th>
+                                <!--{elseif $smarty.get.order==2}-->
+                                <th><a href="./index?order=1&domain=<!--{$smarty.get.domain}-->">排序</a>↓</th>
+                                <!--{else}-->
+                                <th><a href="./index?order=2&domain=<!--{$smarty.get.domain}-->">排序</a></th>
+                                <!--{/if}-->
+                                <th>否是显示</th>
+                                <!--<th>否是批量</th>-->
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--{foreach from=$compose_list item=item}-->
+                            <tr>
+                                <td class="with-checkbox"><!--{$item.id}--></td>
+                                <td style="text-align:left;padding-left:20px"><!--{$item.cn_name}--></td>
+                                <td style="text-align:left;padding-left:20px"><a
+                                        href='/manager/controller/index?com_id=<!--{$item.id}-->'>
+                                    <!--{$item.en_name}--></a></td>
+                                <td><!--{$item.domain}--></td>
+                                <td><!--{$item.orderid}--></td>
+                                <td><!--{if $item.is_show=="N"}-->否<!--{else}-->是<!--{/if}--></td>
+                                <td>
+                                    <a href='/manager/controller/index?com_id=<!--{$item.id}-->' class="btn">
+                                        Controller管理 </a>&#12288;|&#12288;
+                                    <a href='./update?id=<!--{$item.id}-->' class="btn"><i class="icon-edit"></i> 修改</a>&#12288;|&#12288;
+                                    <a href='#'
+                                       onclick='del_compose("<!--{$ctl}-->", "<!--{$item.id}-->","<!--{$item.cn_name}-->")'
+                                       class="btn"><i class="icon-remove"></i> 删除</a>&#12288;|&#12288;
+                                    <!--{if $item.en_name <> 'sys'}-->
+                                    <!--{if $item.is_show=="N"}-->
+                                    <a href='#'
+                                       onclick='hidden_compose("<!--{$ctl}-->", "<!--{$item.id}-->","<!--{$item.cn_name}-->","Y")'
+                                       class="btn"> 显示</a>
+                                    <!--{elseif $item.is_show=="Y"}-->
+                                    <a href='#'
+                                       onclick='hidden_compose("<!--{$ctl}-->", "<!--{$item.id}-->","<!--{$item.cn_name}-->","N")'
+                                       class="btn"> 隐藏</a>
+                                    <!--{/if}-->
+                                    <!--{/if}-->
+                                </td>
+                            </tr>
+                            <!--{/foreach}-->
+                            <tfoot>
+                            <tr>
+                                <th colspan="9"><!--{$pager_html}--></th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </section>
+</div>
+<!--{include file="common/main_footer.html"}-->
+<div class="control-sidebar-bg"></div>
+</div>
+</body>
+</html>
+
+
+
+                <script>
+                    function del_compose(ctl, compose_id, compose_name) {
+                        if (confirm('是否要删除组件：' + compose_name + '？')) {
+                            location.href = "./delete?id=" + compose_id;
+                        }
+                    }
+                    function hidden_compose(ctl, compose_id, compose_name, is_show) {
+                        var msg = '';
+                        msg = (is_show == 'Y') ? '显示' : '隐藏';
+                        if (confirm('是否要' + msg + '组件：' + compose_name + '？')) {
+                            location.href = "./hidden?id=" + compose_id + "&is_show=" + is_show;
+                        }
+                    }
+                </script>
+

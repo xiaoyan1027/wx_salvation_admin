@@ -1,0 +1,91 @@
+<!--{include file="templates/_inc_header.html"}-->
+<title></title>
+<style>
+.menu_list{margin-left:20px;display:none;}
+.menu_list input{margin-right:2px;}
+.list_h4{cursor:pointer;background-color:#eee; line-height:30px; font-size:15px;padding-left: 10px;clear:both;}
+.list_h5{background-color:#f5f5f5;line-height:28px; font-size:14px;padding-left: 5px;font-weight: bold;clear:both;}
+.unstyled{padding-left:20px; margin-bottom:50px;}
+.unstyled label{font-weight: normal;}
+.unstyled li{float:left;line-height: 28px; margin-right: 20px;}
+.p5{clear:both;}
+</style>
+</head>
+<body>
+<div class="rightCon">
+	<h2 class="rightT2"><span class="mr5"><i class="icon-table"></i></span>管理员分配权限</h2>
+    <div class="panel panel-default">
+      	<form name="frm" action="?site=<!--{$site}-->&ctl=<!--{$ctl}-->&act=<!--{$act}-->&user_id=<!--{$user_info.id}-->" method="post">
+		<!--{foreach key=key item=m_right from=$rights}-->
+			<h4 class="list_h4" onclick="_role_loop(<!--{$key}-->)" id="role_b_b<!--{$key}-->"><span id="role_a_b<!--{$key}-->">+</span>&nbsp;<!--{$m_right.cn_name}--></h4>
+			<div id="role_c_b<!--{$key}-->" class="menu_list">
+			<!--{foreach from=$m_right.child item=child_a_right}-->
+				<h5 class="list_h5"><span><input name="" type="checkbox" value="<!--{$child_a_right.id}-->" class="vm" onclick="user_right_select_all_change(this);"></span><!--{$child_a_right.func_name_cn}--></h5>
+				<ul class="unstyled inline">
+				<!--{foreach item=child_b_right from=$child_a_right.child}-->
+					<li><label><input name="rights[]" type="checkbox" value="<!--{$child_b_right.id}-->" class="vm" p="p_<!--{$child_a_right.id}-->"  id="rights_<!--{$child_b_right.id}-->"></label>&nbsp;<!--{$child_b_right.func_name_cn}--></li>
+				<!--{/foreach}-->
+				</ul>
+			<!--{/foreach}-->
+			</div>
+		<!--{/foreach}-->
+		<div class="p5 tc">
+			<input type="submit" class="btn" value="保存" name="">
+			<input type="button" class="btn" value="取消" name="" onclick="history.back()">
+		</div>
+		</form>
+    </div>
+</div>
+</body>
+<script type="text/javascript" >
+	var _loop_id = 0;
+	function _role_loop(id)
+	{
+		var loop_c = 'role_c_b';
+		var loop_b = 'role_b_b';
+		var loop_a= 'role_a_b';
+
+		if( _loop_id==id )
+		{
+			$("#"+loop_c+id).hide();
+			$("#"+loop_a+id).html('+');
+			_loop_id = 0;
+		}else{
+			$("div[id*='"+loop_c+"']").hide();
+			$("span[id*='"+loop_a+"']").html('+');
+			$("#"+loop_c+id).show();
+			$("#"+loop_a+id).html('-');
+			_loop_id = id;
+		}
+	}
+	user_right_set_select('<!--{$user_info.rights}-->');
+	//选择或取消所有子权限
+	function user_right_select_all_change(obj)
+	{
+		var obj = jQuery(obj);
+		var s = "input[p='p_"+obj.val()+"']";
+		if(obj.is(':checked'))
+		{
+			jQuery(s).each(function(){
+				jQuery(this).attr('checked',true);
+			});
+		}else
+		{
+			jQuery(s).each(function(){
+				jQuery(this).attr('checked',false);
+			});
+		}
+	}
+	//设置用户权限的选中
+
+	function user_right_set_select(rights)
+	{
+		if(jQuery.trim(rights)=='') return;
+		var arr = rights.split(',');
+		for(var i=0;i<arr.length;i++)
+		{
+			jQuery("#rights_"+arr[i]).attr('checked',true);
+		}
+	}
+</script>
+</html>

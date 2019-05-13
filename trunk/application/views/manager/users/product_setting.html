@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--{include file="common/head.html"}-->
+    <!--{include file="common/main_header.html"}-->
+    <!--{include file="common/main_sidebar.html"}-->
+</head>
+<link href="/resources/js/searchableselect/jquery.searchableSelect.css" rel="stylesheet" type="text/css">
+<script src="/resources/js/searchableselect/jquery.searchableSelect.js"></script>
+
+<body class="hold-transition skin-green sidebar-mini">
+<div class="wrapper">
+
+
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                <!--{if $act == 'edit' }-->修改<!--{else}-->添加<!--{/if}-->管理员
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                     <form class="form-horizontal" action="./<!--{$act}-->?user_id=<!--{$user_info_detail.id}-->" method="post" id="form" name="form">
+                    <!-- Horizontal Form -->
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><label for="product" <!--{if $user_info_detail.rights_city}--> style="color:#FFC125" <!--{else}--> style="color:blue" <!--{/if}-->><input class="c_add" type="checkbox" name="product[]" <!--{if $user_info_detail.rights_city}-->checked<!--{/if}--> value="habo" />哈勃</label></h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                            <div class="box-body" style="display: none;">
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">管理员级别：</label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control select2"  name="is_super[habo]">
+                                            <option value="N" <!--{if $user_info_detail.is_super == 'N'}-->selected<!--{/if}-->
+                                            >普通管理员</option>
+                                            <option value="Y" <!--{if $user_info_detail.is_super == 'Y'}-->selected<!--{/if}-->
+                                            >超级管理员</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">管理员类型：</label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control select2" name="user_mark[habo]">
+                                            <!--{foreach from=$admin_type_list key=key item=item}-->
+                                            <option value="<!--{$key}-->" <!--{if $user_info_detail.user_mark == $key}-->selected<!--{/if}-->
+                                            ><!--{$item}--></option>
+                                            <!--{/foreach}-->
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">业务类型：</label>
+                                    <div class="col-sm-10">
+                                        <!--{foreach from=$types name=foo item=item key=key}-->
+                                        <label>
+                                            <input type="checkbox" value="<!--{$key}-->" class="checkbox-inline"
+                                                   name="business_type[habo][]" <!--{if $user_info_detail.business_type}-->
+                                            <!--{if in_array($key, $user_info_detail.business_type)}--> checked<!--{/if}--><!--{/if}--> >
+                                            <!--{$item}-->
+                                        </label>
+                                        <!--{/foreach}-->
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label">添加城市：</label>
+                                    <div class="col-sm-2">
+                                        <select class="fl form-control w130 mr10" id="habo_select">
+                                            <option value="all">全部</option>
+                                            <!--{foreach from=$city_list item=item}-->
+                                            <option value="<!--{$item.city_en}-->" ><!--{$item.city_en}-->_<!--{$item.city_cn}--></option>
+                                            <!--{/foreach}-->
+                                        </select>
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label"></label>
+                                    <div class="col-sm-10 pv_citys">
+                                        <!--{if $rights_city}-->
+                                        <!--{foreach from=$rights_city item=item}-->
+                                        <input type="checkbox" name="rights_city[habo][]" value="<!--{$item.city_en}-->" info="<!--{$item.city_cn}-->" checked />&nbsp;<!--{$item.city_cn}-->&nbsp;
+                                        <!--{/foreach}-->
+                                        <!--{/if}-->
+                                    </div>
+                                </div>
+
+                               
+                            </div>
+                    </div>
+                    
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><label for="product" <!--{if $user_extend.dmp}-->checked style="color:#FFC125" <!--{else}--> style="color:blue" <!--{/if}-->><input class="c_add" type="checkbox" name="product[]" <!--{if $user_extend.dmp}-->checked <!--{/if}--> value="dmp" />DMP</label></h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        
+                            <div class="box-body" style="display: none;">
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">管理员级别：</label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control select2"  name="is_super[dmp]">
+                                            <option value="N" <!--{if $user_extend.dmp.is_super == 'N'}-->selected<!--{/if}-->
+                                            >普通管理员</option>
+                                            <option value="Y" <!--{if $user_extend.dmp.is_super == 'Y'}-->selected<!--{/if}-->
+                                            >超级管理员</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">管理员类型：</label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control select2" name="user_mark[dmp]">
+                                            <!--{foreach from=$admin_type_list key=key item=item}-->
+                                            <option value="<!--{$key}-->" <!--{if $user_extend.dmp.user_mark == $key}-->selected<!--{/if}-->
+                                            ><!--{$item}--></option>
+                                            <!--{/foreach}-->
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">业务类型：</label>
+                                    <div class="col-sm-10">
+                                        <!--{foreach from=$types name=foo item=item key=key}-->
+                                        <label>
+                                            <input type="checkbox" value="<!--{$key}-->" class="checkbox-inline"
+                                                   name="business_type[dmp][]" <!--{if $user_extend.dmp.business_type}-->
+                                            <!--{if in_array($key, $user_extend.dmp.business_type)}--> checked<!--{/if}--><!--{/if}--> >
+                                            <!--{$item}-->
+                                        </label>
+                                        <!--{/foreach}-->
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label">添加城市：</label>
+                                    <div class="col-sm-2">
+                                        <select class="fl form-control w130 mr10" id="dmp_select">
+                                            <option value="all">全部</option>
+                                            <!--{foreach from=$city_list item=item}-->
+                                            <option value="<!--{$item.city_en}-->" ><!--{$item.city_en}-->_<!--{$item.city_cn}--></option>
+                                            <!--{/foreach}-->
+                                        </select>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label"></label>
+                                    <div class="col-sm-10 pv_citys">
+                                        <!--{if $user_extend.dmp.rights_city}-->
+                                        <!--{foreach from=$user_extend.dmp.rights_city item=item}-->
+                                        <input type="checkbox" name="rights_city[dmp][]" value="<!--{$item.city_en}-->" info="<!--{$item.city_cn}-->" checked />&nbsp;<!--{$item.city_cn}-->&nbsp;
+                                        <!--{/foreach}-->
+                                        <!--{/if}-->
+                                    </div>
+                                </div>
+
+                            </div>
+                    </div>
+
+
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><label for="product" <!--{if $user_extend.urs}-->checked style="color:#FFC125" <!--{else}--> style="color:blue" <!--{/if}-->><input class="c_add" type="checkbox" name="product[]" <!--{if $user_extend.urs}-->checked <!--{/if}--> value="urs" />URS</label></h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        
+                            <div class="box-body" style="display: none;">
+
+                                <div class="form-group" style="display: none;" >
+                                    <label class="col-sm-2 control-label">管理员级别：</label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control select2" name="is_super[urs]">
+                                            <option value="N" <!--{if $user_extend.urs.is_super == 'N'}-->selected<!--{/if}-->
+                                            >普通管理员</option>
+                                            <option value="Y" <!--{if $user_extend.urs.is_super == 'Y'}-->selected<!--{/if}-->
+                                            >超级管理员</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">管理员类型：</label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control select2" name="user_mark[urs]">
+                                            <!--{foreach from=$admin_type_list key=key item=item}-->
+                                            <option value="<!--{$key}-->" <!--{if $user_extend.urs.user_mark == $key}-->selected<!--{/if}-->
+                                            ><!--{$item}--></option>
+                                            <!--{/foreach}-->
+                                        </select>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label">添加城市：</label>
+                                    <div class="col-sm-2">
+                                        <select class="fl form-control w130 mr10" id="urs_select">
+                                            <option value="all">全部</option>
+                                            <!--{foreach from=$city_list item=item}-->
+                                            <option value="<!--{$item.city_en}-->" ><!--{$item.city_en}-->_<!--{$item.city_cn}--></option>
+                                            <!--{/foreach}-->
+                                        </select>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label"></label>
+                                    <div class="col-sm-10 pv_citys">
+                                        <!--{if $user_extend.urs.rights_city}-->
+                                        <!--{foreach from=$user_extend.urs.rights_city item=item}-->
+                                        <input type="checkbox" name="rights_city[urs][]" value="<!--{$item.city_en}-->" info="<!--{$item.city_cn}-->" checked />&nbsp;<!--{$item.city_cn}-->&nbsp;
+                                        <!--{/foreach}-->
+                                        <!--{/if}-->
+                                    </div>
+                                </div>
+                                <div class="form-group urs_bind_lp" style="display: none;">
+                                    <label  class="col-sm-2 control-label">绑定楼盘：</label>
+                                    <div class="col-sm-2">
+                                         <table style="width: 300px;">
+                                         <tr><td>
+                                         <select class="fl form-control w130 mr10" name="urs_city_en">
+                                            <!--{foreach from=$city_list item=item}-->
+                                            <option value="<!--{$item.city_en}-->" ><!--{$item.city_en}-->_<!--{$item.city_cn}--></option>
+                                            <!--{/foreach}-->
+                                         </select>
+                                         </td>
+                                         <td>
+                                         <input class="fl form-control" type="text" placeholder="楼盘名称/楼盘ID" name="keywords">
+                                         </td>
+                                         <td><input type="button"  class="btn btn-default" value="搜索" name="search_house"></td>
+                                         </tr>
+                                         </table>
+                                         <div style="width: 300px; max-height: 200px;cursor: pointer;">
+                                         <table id="urs_lp_list" class="table table-bordered1 table-hover" >
+                                         <!--{if $user_extend.urs.rel_data.lp_list}-->
+                                         <tr><th>城市</th><th>楼盘ID</th><th>楼盘名称</th></tr>
+                                         <!--{foreach from=$user_extend.urs.rel_data.lp_list item=item}-->
+                                         <tr><td><!--{$item[3]}--></td><td><!--{$item[1]}--></td><td><!--{$item[2]}--></td></tr>
+                                         <!--{/foreach}-->
+                                         <!--{/if}-->
+                                         </table>
+                                         </div>
+                                         
+                                    </div>
+
+                                </div>
+                            </div>
+                    </div>
+                    
+                    
+                    <!-- 视界 Start -->
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><label for="product" <!--{if $user_extend.eyeshot}-->checked style="color:#FFC125" <!--{else}--> style="color:blue" <!--{/if}--> ><input class="c_add" type="checkbox" name="product[]" <!--{if $user_extend.eyeshot}-->checked <!--{/if}--> value="eyeshot" />视界</label></h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                            <div class="box-body" style="display: none;">
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">管理员级别：</label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control select2"  name="is_super[eyeshot]">
+                                            <option value="N" <!--{if $user_extend.eyeshot.is_super == 'N'}-->selected<!--{/if}-->
+                                            >普通管理员</option>
+                                            <option value="Y" <!--{if $user_extend.eyeshot.is_super == 'Y'}-->selected<!--{/if}-->
+                                            >超级管理员</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">管理员类型：</label>
+                                    <div class="col-sm-2">
+                                        <select class="form-control select2" name="user_mark[eyeshot]">
+                                            <!--{foreach from=$admin_type_list key=key item=item}-->
+                                            <option value="<!--{$key}-->" <!--{if $user_extend.eyeshot.user_mark == $key}-->selected<!--{/if}-->
+                                            ><!--{$item}--></option>
+                                            <!--{/foreach}-->
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">业务类型：</label>
+                                    <div class="col-sm-2">
+                                        <input type="checkbox" value="toushi" class="checkbox-inline" name="business_type[eyeshot][]" <!--{foreach from=$user_extend.eyeshot.business_type item=vo}--><!--{if $vo eq 'toushi'}-->checked<!--{/if}--><!--{/foreach}-->> 项目透视
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label">添加城市：</label>
+                                    <div class="col-sm-2">
+                                        <select class="fl form-control w130 mr10" id="shijie_select">
+                                            <option value="all">全部</option>
+                                            <!--{foreach from=$city_list item=item}-->
+                                            <option value="<!--{$item.city_en}-->" ><!--{$item.city_en}-->_<!--{$item.city_cn}--></option>
+                                            <!--{/foreach}-->
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label"></label>
+                                    <div class="col-sm-10 pv_citys">
+                                        <!--{if $user_extend.eyeshot.rights_city}-->
+                                        <!--{foreach from=$user_extend.eyeshot.rights_city item=item}-->
+                                        <input type="checkbox" name="rights_city[eyeshot][]" value="<!--{$item.city_en}-->" info="<!--{$item.city_cn}-->" checked />&nbsp;<!--{$item.city_cn}-->&nbsp;
+                                        <!--{/foreach}-->
+                                        <!--{/if}-->
+                                    </div>
+                                </div>
+
+
+                                <!-- 绑定楼盘 -->
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label">绑定楼盘：</label>
+                                    <div class="col-sm-2">
+                                        <input type="checkbox" id="build_set" name="all_build" value="all_build" <!--{if $user_extend.eyeshot.rel_data.bind_build.toushi.0 eq 'all_build'}-->checked<!--{/if}-->/>不限楼盘
+                                        <br>
+                                        <table style="width:350px">
+                                            <tr>
+                                                <td width=100px>
+                                                    <select class="fl form-control w130 mr10" id="build_city">
+                                                        <!-- <option value="all">全部</option> -->
+                                                        <!--{foreach from=$city_list item=item}-->
+                                                        <option value="<!--{$item.city_en}-->" ><!--{$item.city_en}-->_<!--{$item.city_cn}--></option>
+                                                        <!--{/foreach}-->
+                                                    </select>
+                                                </td>
+                                                <td width=100px>
+                                                    <input class="fl form-control" type="text" placeholder="楼盘ID" name="build_id" id="build_id">
+                                                </td>
+                                                <td>
+                                                    <input type="button"  class="btn btn-default" value="添加" id="add_build_id">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label"></label>
+                                    <div class="col-sm-10" id="build_show">
+                                        <!--{if $user_extend.eyeshot.rel_data.bind_build.toushi}-->
+                                        <!--{if $user_extend.eyeshot.rel_data.bind_build.toushi.0 neq 'all_build'}-->
+                                        <!--{foreach from=$user_extend.eyeshot.rel_data.bind_build.toushi item=vo key=key}-->
+                                        <input type="checkbox" name="bind_build[eyeshot][]" value="<!--{$vo}-->" checked />&nbsp;&nbsp;<!--{$vo}-->
+                                        <!--{/foreach}-->
+                                        <!--{/if}-->
+                                        <!--{/if}-->
+                                    </div>
+                                    <input type="hidden" id="all_build_input_tag" value="<!--{$user_extend.eyeshot.bind_build_tag}-->">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label"></label>
+                                    <div class="col-sm-10" id="build_show">
+                                       <hr>
+                                    </div>
+                                </div>
+
+                                <!-- 效果评估 -->
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">业务类型：</label>
+                                    <div class="col-sm-2">
+                                        <input type="checkbox" value="pinggu" class="checkbox-inline" name="business_type[eyeshot][]" <!--{foreach from=$user_extend.eyeshot.business_type item=vo}--><!--{if $vo eq 'pinggu'}-->checked<!--{/if}--><!--{/foreach}-->> 效果评估
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label">添加城市：</label>
+                                    <div class="col-sm-2">
+                                        <select class="fl form-control w130 mr10" id="shijie_select1">
+                                            <option value="please">请选择</option>
+                                            <option value="all">全部</option>
+                                            <!--{foreach from=$city_list item=item}-->
+                                            <option value="<!--{$item.city_en}-->" ><!--{$item.city_en}-->_<!--{$item.city_cn}--></option>
+                                            <!--{/foreach}-->
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label"></label>
+                                    <div class="col-sm-10 pv_citys1">
+                                        <!--{if $user_extend.eyeshot.rights_city1}-->
+                                        <!--{foreach from=$user_extend.eyeshot.rights_city1 item=item}-->
+                                        <input class="az" type="checkbox" name="rights_city1[eyeshot][]" value="<!--{$item.city_en}-->" info="<!--{$item.city_cn}-->" checked />&nbsp;<!--{$item.city_cn}-->&nbsp;
+                                        <!--{/foreach}-->
+                                        <!--{/if}-->
+                                    </div>
+                                    <input type="hidden" id="s_city" value="<!--{$user_extend.eyeshot.s_city}-->">
+                                </div>
+
+
+                                <!-- 绑定楼盘 -->
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label">绑定楼盘：</label>
+                                    <div class="col-sm-2">
+                                        <input type="checkbox" name="all_build1" value="all_build" <!--{if $user_extend.eyeshot.rel_data.bind_build.pinggu.0 eq 'all_build'}-->checked<!--{/if}-->/>不限楼盘
+                                        <br>
+                                        <table style="width:350px">
+                                            <tr>
+                                                <td width=100px>
+                                                    <select class="fl form-control w130 mr10" id="build_city1">
+                                                        <!-- <option value="all">全部</option> -->
+                                                        <!--{foreach from=$city_list item=item}-->
+                                                        <option value="<!--{$item.city_en}-->" ><!--{$item.city_en}-->_<!--{$item.city_cn}--></option>
+                                                        <!--{/foreach}-->
+                                                    </select>
+                                                </td>
+                                                <td width=100px>
+                                                    <input class="fl form-control" type="text" placeholder="楼盘ID" name="build_id1" id="build_id1">
+                                                </td>
+                                                <td>
+                                                    <input type="button" class="btn btn-default" value="添加" id="add_build_id1">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label"></label>
+                                    <div class="col-sm-10" id="build_show1">
+                                        <!--{if $user_extend.eyeshot.rel_data.bind_build.pinggu}-->
+                                        <!--{if $user_extend.eyeshot.rel_data.bind_build.pinggu.0 neq 'all_build'}-->
+                                        <!--{foreach from=$user_extend.eyeshot.rel_data.bind_build.pinggu item=vo key=key}-->
+                                        <input type="checkbox" name="bind_build1[eyeshot][]" value="<!--{$vo}-->" checked />&nbsp;&nbsp;<!--{$vo}-->
+                                        <!--{/foreach}-->
+                                        <!--{/if}-->
+                                        <!--{/if}-->
+                                    </div>
+                                    <input type="hidden" id="all_build_input_tag1" value="<!--{$user_extend.eyeshot.bind_build_tag1}-->">
+                                </div>
+                                <!-- 绑定产品 -->
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label">绑定产品：</label>
+                                    <div class="col-sm-2">
+                                        <input type="checkbox" id="product_set" name="all_product" value="all_product" <!--{if $user_extend.eyeshot.rel_data.bind_product.pinggu.0 eq 'all_product'}-->checked<!--{/if}-->/>不限产品
+                                        <br>
+                                        <table style="width:350px">
+                                            <tr>
+                                                <td width="100px">
+                                                    <select class="fl form-control w130 mr10" id="product_type">
+                                                        <!--{foreach from=$product_type item=vo key=key}-->
+                                                        <option value="<!--{$key}-->"><!--{$vo}--></option>
+                                                        <!--{/foreach}-->
+                                                    </select>
+                                                </td>
+                                                <td width="100px">
+                                                    <input type="button" class="btn btn-default" value="添加" id="add_product">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label"></label>
+                                    <div class="col-sm-10" id="product_show">
+                                        <!--{if $user_extend.eyeshot.rel_data.bind_product.pinggu}-->
+                                        <!--{if $user_extend.eyeshot.rel_data.bind_product.pinggu.0 neq 'all_build' and $user_extend.eyeshot.rel_data.bind_product.pinggu.0 neq 'all_product'}-->
+                                        <!--{foreach from=$user_extend.eyeshot.rel_data.bind_product.pinggu item=vo key=key}-->
+                                        <input type="checkbox" name="bind_product[eyeshot][]" value="<!--{$vo}-->" checked />&nbsp;&nbsp;
+                                        <!--{foreach from=$product_type item=voo key=keyy}-->
+                                            <!--{if $keyy eq $vo}-->
+                                                <!--{$voo}-->
+                                            <!--{/if}-->
+                                        <!--{/foreach}-->
+                                        <!--{/foreach}-->
+                                        <!--{/if}-->
+                                        <!--{/if}-->
+                                    </div>
+                                    <input type="hidden" id="all_product_input_tag" value="<!--{$user_extend.eyeshot.bind_product_tag}-->">
+                                </div>
+
+
+                            </div>
+                    </div>
+                    <!-- 视界 End -->
+                    <div class="box box-info">
+                                <div class="box-footer">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label"></label>
+
+                                        <button type="button" class="btn btn-default" onclick="window.history.go(-1);">
+                                            取消
+                                        </button>
+                                        <button type="submit" class="btn btn-info center">提交</button>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="control-sidebar-bg"></div>
+</div>
+</body>
+</html>
+
+
+<script type="text/javascript" >
+    var cur_user_id = '<!--{$user_info_detail.id}-->';
+    $(function(){
+
+        $('#habo_select').searchableSelect();
+        $('#dmp_select').searchableSelect();
+        $('#urs_select').searchableSelect();
+        $('#shijie_select').searchableSelect();
+        $(".searchable-select-item").bind('click', function(){
+            var parent = $(this).parents(".box-info");
+            var product = $("input[name='product[]']",parent).val();
+            var city_en = $(this).attr('data-value');
+            var city_cn = $(this).html();
+
+            var name_list = new Array();
+            var chekc_name_list = new Array();
+
+            $("[name^=rights_city]",parent).each(function(){
+                if ($(this).is(':checked')) {
+                    chekc_name_list.push($(this).val());
+                }
+                name_list.push($(this).val());
+            });
+
+            //alert(name_list);
+
+            if (chekc_name_list.indexOf('all') >= 0) {
+                alert('全部已包含所有城市!');
+                return false;
+            }
+
+            if (name_list.indexOf(city_en) > -1) {
+                alert('城市已存在');
+                return false;
+            }
+
+            var all_citys_input = $('.pv_citys',parent).html();
+
+            if (city_en == 'all') {
+                all_citys_input = '';
+            }
+
+            all_citys_input += '<input type="checkbox" name="rights_city['+product+'][]" info="' + city_cn + '"  value="' + city_en + '" checked="checked"/>' + city_cn;
+            $('.pv_citys',parent).html(all_citys_input);
+
+        });
+
+
+        $('.pv_citys').on('click', "input[name^='rights_city']", function() {
+            var parent = $(this).parents(".box-info");
+            var product = $("input[name='product[]']",parent).val();
+            obj = $(this);
+            if (!$(this).is(':checked')) {
+                $(this).removeAttr("checked");
+            } else {
+                obj.attr('checked', 'checked');
+                if ($(this).val() == 'all') {
+                    all_citys_input = '<input type="checkbox" name="rights_city['+product+'][]" info="全部"  value="all" checked="checked"/>' + '全部';
+                    $(this).parent().html(all_citys_input);
+                }
+            }
+        });
+        
+        
+        $("input[name='product[]']").change(function(){
+            var _this = this;
+            var _parent = $(_this).parents(".box-info");
+            if($(_this).prop("checked"))
+            {
+                $(".box-body",_parent).slideDown();
+            }
+            else
+            {
+                $(".box-body",_parent).slideUp();
+            }
+        });
+        
+        $("input[name='product[]']").change();
+        
+    });
+
+
+
+
+    $("#add_build_id").bind('click', function(){
+        var city_en = $("#build_city").val();
+        var city_cn = $("#build_city").find("option:selected").text();
+        var build_id = $("#build_id").val();
+
+        if (!build_id) {
+            alert("请输入楼盘ID");
+            return false;
+        }
+
+        // 遍历
+        var iii = 0;
+        var all_build_input = $("#all_build_input_tag").val().split(',');
+        $.each(all_build_input, function(index, value){
+            if (value == (city_cn + '-' + build_id)) {
+                iii = iii + 1;
+            }
+        })
+        if (iii > 0) {
+            alert("此楼盘已添加！");
+            return false;
+        }
+
+        var all_build_input_tag = $("#all_build_input_tag").val();
+        $("#all_build_input_tag").val(all_build_input_tag + city_cn + '-' + build_id + ',');
+
+        var build_input = '<input type="checkbox" name="bind_build[eyeshot][]"  value="' + city_cn + '-' + build_id + '" checked="checked"/>' + city_cn + '-' + build_id;
+        $("#build_show").append(build_input);
+    })
+
+    $("#add_build_id1").bind('click', function(){
+        var city_en = $("#build_city1").val();
+        var city_cn = $("#build_city1").find("option:selected").text();
+        var build_id = $("#build_id1").val();
+
+        if (!build_id) {
+            alert("请输入楼盘ID");
+            return false;
+        }
+
+        // 遍历
+        var iii = 0;
+        var all_build_input = $("#all_build_input_tag1").val().split(',');
+        $.each(all_build_input, function(index, value){
+            if (value == (city_cn + '-' + build_id)) {
+                iii = iii + 1;
+            }
+        })
+        if (iii > 0) {
+            alert("此楼盘已添加！");
+            return false;
+        }
+
+        var all_build_input_tag = $("#all_build_input_tag1").val();
+        $("#all_build_input_tag1").val(all_build_input_tag + city_cn + '-' + build_id + ',');
+
+        var build_input = '<input type="checkbox" name="bind_build1[eyeshot][]"  value="' + city_cn + '-' + build_id + '" checked="checked"/>' + city_cn + '-' + build_id;
+        $("#build_show1").append(build_input);
+    })
+
+    // $("#business_type").bind('change', function(){
+    //     var business_type = $("#business_type").val();
+    //     if (business_type == 'pinggu') {
+    //         $(".bind-product").css({
+    //             display: 'block'
+    //         });
+    //     } else {
+    //         $(".bind-product").css({
+    //             display: 'none'
+    //         });
+    //     }
+    // })
+
+     $("#add_product").bind('click', function(){
+        var product_type = $("#product_type").val();
+        var product_type_cn = $("#product_type").find("option:selected").text();
+
+        // 遍历
+        var iii = 0;
+        var all_product_input = $("#all_product_input_tag").val().split(',');
+        $.each(all_product_input, function(index, value){
+            if (value == product_type) {
+                iii = iii + 1;
+            }
+        })
+        if (iii > 0) {
+            alert("此项已添加！");
+            return false;
+        }
+
+        var all_product_input_tag = $("#all_product_input_tag").val();
+        $("#all_product_input_tag").val(all_product_input_tag + product_type + ',');
+
+        var product_input = '<input type="checkbox" name="bind_product[eyeshot][]"  value="' + product_type + '" checked="checked"/>' + product_type_cn;
+        $("#product_show").append(product_input);
+    })
+
+
+    $(".az").bind('change', function(){
+        if ($(this).is(":checked") == true) {
+            var city_input11 = '<input class="az" type="checkbox" name="rights_city1[eyeshot][]" value="all" info="全部" checked="checked">全部';
+            $(".pv_citys1").html(city_input11);
+        }
+    })
+    $("#shijie_select1").bind('change', function(){
+        var city_en = $(this).val();
+        var city_cn = $(this).find("option:selected").text();
+
+
+        var kkk = 0;
+        var city_son = $(".pv_citys1").children();
+        city_son.each(function() {
+            // alert($(this).val());
+            if (($(this).val() == 'all') && ($(this).is(":checked") == true)) {
+                kkk = kkk + 1;
+            }
+        });
+        if (kkk > 0) {
+            alert("全部已包括所有！");
+            return false;
+        }
+
+        var iii = 0;
+        var jjj = 0;
+        var all_build_input = $("#s_city").val().split(',');
+        $.each(all_build_input, function(index, value){
+            if (value == 'all') {
+                jjj = jjj + 1;
+            }
+            if (value == city_en) {
+                iii = iii + 1;
+            }
+        })
+        // if (jjj > 0) {
+        //     alert("全部已包括所有！");
+        //     return false;
+        // }
+        if (iii > 0) {
+            alert("此城市已添加！");
+            return false;
+        }
+
+        if (city_en != 'please') {
+            var s_city = $("#s_city").val();
+            $("#s_city").val(s_city + city_en + ',');
+
+            var city_input = '<input class="az" type="checkbox" name="rights_city1[eyeshot][]"  value="' + city_en + '" checked="checked"/>' + city_cn;
+            $(".pv_citys1").append(city_input);
+        }
+    })
+
+    $(".c_add").bind('click', function(){
+        if ($(this).is(":checked")) {
+            $(this).parent('label').css({color:'#FFC125'});
+        } else {
+            $(this).parent('label').css({color:'blue'});
+        }
+    })
+    
+    $("input[name='search_house']").click(function(){
+        var keywords = $("input[name='keywords']").val();
+        var city_en = $("select[name='urs_city_en']").val();
+        var list = $("#urs_lp_list");
+        $.post('/manager/users/search_house',{keywords:keywords,city_en:city_en},function(data){
+            if(data.status == 'true')
+            {
+                list.empty();
+                list.parent().css('overflow-y','scroll');
+                list.append("<tr><th>选择</th><th>楼盘ID</th><th>楼盘名称</th></tr>");
+                for(var i=0;i<data.data.length;i++)
+                {
+                    var tr = $("<tr><td><input type='radio' name='urs_lp' value='"+data.data[i].site+","+data.data[i].hid+","+data.data[i].name+"'/></td><td>"+data.data[i].hid+"</td><td>"+data.data[i].name+"</td></tr>");
+                    list.append(tr);
+                }
+            }
+        },'json'); 
+    });
+    $("#urs_lp_list").delegate("tr","click",function(){
+       var _this = this;
+       //console.log(_this);
+       var _radio = $(_this).find('input[type="radio"]');
+       _radio.prop("checked",true);
+    });
+    $('select[name="user_mark[urs]"]').change(function(){
+        var _this = this;
+        if($(_this).val() == 1)
+        {
+            $(".urs_bind_lp").hide();
+        }
+        else
+        {
+            $(".urs_bind_lp").show();
+        }
+    });
+    $('select[name="user_mark[urs]"]').change();
+</script>

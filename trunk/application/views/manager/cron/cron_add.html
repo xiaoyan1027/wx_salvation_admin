@@ -1,0 +1,130 @@
+<!--{include file='common/header.html'}-->
+<title>添加任务</title>
+</head>
+
+<body>
+    <div class="main">
+    <!--功能块 start-->
+    <div class="page_tile">
+        <h2>添加任务</h2>
+    </div>
+    <div style="">
+        <p style="margin-left:10px;">请在充分了解crontab后进行添加，支持任何符合crontab的语法格式</p>
+       <p style="margin-left:10px;"> 例如<b style='font-size:8px;'><i>(每一个例子用'|'分开)</i></b>：&nbsp;25&nbsp;&nbsp;9,10,12 &nbsp;&nbsp;*&nbsp;&nbsp; * &nbsp;&nbsp;*  |
+                5&nbsp;&nbsp;0-23/1  &nbsp;&nbsp;* &nbsp;&nbsp;*&nbsp;&nbsp; * |
+               *&nbsp;&nbsp; * &nbsp;&nbsp;29 &nbsp;&nbsp;2&nbsp;&nbsp; * |
+                *&nbsp;&nbsp; * &nbsp;&nbsp;3 &nbsp;&nbsp;Feb &nbsp;&nbsp;Sat |</p>
+            <p style="margin-left:10px;">每个例子用空格分开，分别对应 分钟 小时 日期 月份 星期</p>
+           <p style="margin-left:10px;">note:请尽量将执行的时间条件设置为不同，对并发支持比较差 &nbsp;;&nbsp; 目前只支持php命令</p>
+        </div>
+    <div class="blk mt10 mb20">
+
+        <h4 class="table_form_title">任务信息</h4>
+        <form name="frm1" id="frm1" action="?site=<!--{$site}-->&ctl=<!--{$ctl}-->&act=<!--{$act}-->" method="post">
+            <table width="100%" cellspacing="1" cellpadding="0" class="table_form">
+                <tr>
+                    <td class="tr" width="100">名称：</td>
+                    <td>
+                        <input type="text" name="name" mod="isempty" msg="名称不能为空"  id="textfield">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tr" width="100">分钟：</td>
+                    <td>
+                        <input type="text" name="minute" mod="isempty" msg="分钟不能为空" value='*' id="textfield" maxlength='10' >
+                    </td>
+                    <td class="tr" width="100">小时：</td>
+                    <td>
+                        <input type="text" name="hour" mod="isempty" msg="小时不能为空" value='*' id="textfield">
+                    </td>
+                </tr>
+                <tr>
+                   <td class="tr" width="100">日期：</td>
+                    <td>
+                        <input type="text" name="dom" mod="isempty" msg="日期不能为空" value='*' id="textfield">
+                    </td>
+                    <td class="tr" width="100">月份：</td>
+                    <td>
+                        <input type="text" name="month" mod="isempty" msg="月份不能为空" value='*' id="textfield">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tr" width="100">星期：</td>
+                    <td>
+                        <input type="text" name="dow" mod="isempty" msg="星期不能为空" value='*' id="textfield">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tr" width="100">命令：</td>
+                    <td>
+                        <input type="text" name="command" mod="isempty" msg="命令不能为空" value='php'  id="textfield">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tr" width="100">执行控制器：</td>
+                    <td>
+                        <input type="text" name="exec_mod" mod="isempty" msg="执行控制器不能为空"  id="textfield">
+                        <span class="help-block">Help block with success</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tr" width="100">执行方法名：</td>
+                    <td>
+                        <input type="text" name="exec_act" mod="isempty" msg="执行方法不能为空"  id="textfield"> act名称，方法名
+                    </td>
+                </tr>         
+                <tr>
+                    <td class="tr" width="100">描述：</td>
+                    <td>
+                        <input type="text" name="description" mod="isempty" msg="请添加描述"  id="textfield">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tr">任务状态：</td>
+                    <td>
+                        <select name="is_valid" id="status" mod="isempty" msg="任务状态不能为空">
+                                <option value="1" selected='selected'>可用</option>
+                                 <option value="0">不可用</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="tr">是否允许手动执行：</td>
+                    <td>
+                        <select name="manual_op" id="status" mod="isempty" msg="任务状态不能为空">
+                                <option value="1" selected='selected'>可以</option>
+                                 <option value="0">不可以</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tr">入口：</td>
+                    <td>
+                        <select name="thread" id="thread" mod="isempty" msg="入口不能为空">
+                            <!--{html_options options=$threads}-->
+                        </select>
+                        <h4>选择不同的入口执行任务，避免相同任务同时执行或任务执行时间较长影响任务执行</h4>
+                        <p>入口 1-5 用来执行占用时间短，间隔时间长的任务</p>
+                        <p>入口 6-8 用来执行占用时间短，间隔时间短的任务</p>
+                        <p>入口 9，10 用来执行占用时间长的任务，请合理选择入口。</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tr">
+
+                    </td>
+                    <td>
+                        <input name="" type="button" value="添加" onclick="validate_form( 'frm1', 1 )" class="vm">
+                        <input name="" type="button" value="重置" onclick="this.form.reset();" class="vm">
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+    </div>
+    </div>
+
+</body>
+</html>
+

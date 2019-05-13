@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--{include file="common/head.html"}-->
+    <!--{include file="common/main_header.html"}-->
+    <!--{include file="common/main_sidebar.html"}-->
+</head>
+<body class="hold-transition skin-green sidebar-mini">
+<div class="wrapper">
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                角色列表
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                <div class="box box-success">
+                    <div class="panel-heading clearfix">
+                        <form name="frm" action="./roleList" method="get" class="form-search form-inline">
+                        
+                            角色名:<input type="text" name="role_name" value="<!--{$smarty.get.role_name}-->" class="fl form-control w130 mr10"/>
+                            <button type="submit" class="btn bg-olive margin">搜索</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="box box-warning">
+                    <!--<div class="box-header">-->
+                    <!--<h3 class="box-title">Hover Data Table</h3>-->
+                    <!--</div>-->
+                    <div class="box-body">
+
+                        <table id="example2" class="table  table-hover">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>角色名称</th>
+                                <th>角色描述</th>
+                                <th>创建时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--{foreach from=$data item=role}-->
+                            <tr>
+                                <td><!--{$role.id}--></td>
+                                <td><!--{$role.role_name}--></td>
+                                <td><!--{$role.role_desc}--></td>
+                                <td><!--{$role.create_time|date_format:"%Y-%m-%d %H:%M:%S"}--></td>
+                                <td>
+                                    <a href="./assign_role_rights?id=<!--{$role.id}-->">分配权限</a> |
+                                    <a href="./role_form?id=<!--{$role.id}-->">编辑</a> |
+                                    <a href="javascript:void(0);" onclick="if(confirm('确认删除该角色吗？')){location.href='./delete_role?id=<!--{$role.id}-->'}">删除</a>
+                                </td>
+                            </tr>
+                            <!--{/foreach}-->
+                            <tfoot>
+                            <tr>
+                                <th colspan="9"><!--{$pager_html}--></th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </section>
+</div>
+<!--{include file="common/main_footer.html"}-->
+<div class="control-sidebar-bg"></div>
+</div>
+</body>
+</html>
+
+

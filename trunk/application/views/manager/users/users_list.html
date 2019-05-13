@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--{include file="common/head.html"}-->
+    <!--{include file="common/main_header.html"}-->
+    <!--{include file="common/main_sidebar.html"}-->
+</head>
+<link href="/resources/js/searchableselect/jquery.searchableSelect.css" rel="stylesheet" type="text/css">
+<script src="/resources/js/searchableselect/jquery.searchableSelect.js"></script>
+
+<body class="hold-transition skin-green sidebar-mini">
+<div class="wrapper">
+
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                账号列表
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+
+                <div class="box box-success">
+                    <div class="panel-heading clearfix">
+                        <form name="frm" action="./index" method="get" class="form-search form-inline">
+                            用户名:<input type="text" name="user_name" value="<!--{$smarty.get.user_name}-->" class="fl form-control w130 mr10"/>
+                            邮箱:<input type="text" name="email" value="<!--{$smarty.get.email}-->" class="fl form-control w130 mr10"/>
+                            电话:<input type="text" name="mobile" value="<!--{$smarty.get.mobile}-->" class="fl form-control w130 mr10"/>
+                           
+                            <button type="submit" class="btn bg-olive margin">搜索</button>
+                        </form>
+                    </div>
+                </div>
+
+
+
+
+                <div class="box box-warning">
+                    <!--<div class="box-header">-->
+                    <!--<h3 class="box-title">Hover Data Table</h3>-->
+                    <!--</div>-->
+                    <div class="box-body">
+                        <div class="dataTables_wrapper form-inline dt-bootstrap">
+                        <table id="example2" class="table  table-hover">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>用户名</th>
+                                <th>真实姓名</th>
+                                <th>性别</th>
+                                <th>手机</th>
+                                <th>管理员类型</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--{foreach from=$list item=row}-->
+                            <tr>
+                                <td><!--{$row.id}--></td>
+                                <td><!--{$row.user_name}--></td>
+                                <td><!--{$row.real_name}--></td>
+                                <td><!--{$row.gender}--></td>
+                                <td><!--{$row.mobile}--></td>
+                                <td><!--{if $row.is_super eq 'Y'}-->超管<!--{elseif $row.is_super eq 'N'}-->普通管理员<!--{/if}--></td>
+                                <td><!--{if $row.status eq 1}-->使用中<!--{elseif $row.status eq 3}-->已关闭<!--{/if}--></td>
+                                <td>
+                                <a href="./add_admin_user?id=<!--{$row.id}-->">编辑</a>
+                                <a href="./distribute_role?id=<!--{$row.id}-->">分配角色</a>
+                                <a href="./edit_passwd?id=<!--{$row.id}-->">修改密码</a>
+                                <a href="javascript:void(0);" onclick="if(confirm('确认删除该用户吗？')){location.href='./delete_user?id=<!--{$role.id}-->'}">删除</a>
+                                </td>
+                            </tr>
+                            <!--{/foreach}-->
+                        </table>
+                        <div class="box-footer  text-center"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </section>
+</div>
+<!--{include file="common/main_footer.html"}-->
+<div class="control-sidebar-bg"></div>
+</div>
+</body>
+</html>
+

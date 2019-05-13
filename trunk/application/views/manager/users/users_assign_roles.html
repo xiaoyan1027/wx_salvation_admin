@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--{include file="common/head.html"}-->
+    <!--{include file="common/main_header.html"}-->
+    <!--{include file="common/main_sidebar.html"}-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+
+    
+    <link href="/resources/css/ui.datepicker.css" rel="stylesheet" type="text/css"/>
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                角色管理
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                  <!-- Custom Tabs -->
+                  <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                      <li class="active"><a href="#tab_1" data-toggle="tab">分配角色</a></li>
+                      <li><a href="#tab_2" data-toggle="tab">已分配角色</a></li>
+                    
+                      
+                     
+                    </ul>
+                    <div class="tab-content">
+                      <div class="tab-pane active" id="tab_1">
+                      
+                      <form name="frm" action="./distributeRole" method="get" class="form-search form-inline">
+                            <input type="hidden" name="id" value="<!--{$user_info.id}-->"/>
+                            产品:
+                            <select class="fl form-control w130 mr10" name="product_type" id="select">
+                                <option value="">请选择</option>
+                                <!--{foreach from=$product_list key=key item=item}-->
+                                <option value="<!--{$key}-->" <!--{if $smarty.get.product_type == $key}-->selected<!--{/if}-->><!--{$item}--></option>
+                                <!--{/foreach}-->
+                            </select>
+                            角色名:<input type="text" name="role_name" value="<!--{$smarty.get.role_name}-->" class="fl form-control w130 mr10"/>
+                            <button type="submit" class="btn bg-olive margin">搜索</button>
+                        </form>
+                      <form method="post" id="role_form" name="role_form"
+                              action="./<!--{$act}-->?id=<!--{$user_info.id}-->">
+                            <input type="hidden" name="id" value="<!--{$user_info.id}-->"/>
+                        <table id="example2" class="table  table-hover">
+                                <thead>
+                                <tr>
+                                    <th>选择</th>
+                                    <th>角色名称</th>
+                                    <th>角色描述</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!--{foreach from=$role_list item=row}-->
+                                <tr>
+                                    <td><input type="checkbox" name="role_ids[]" value="<!--{$row.id}-->"
+                                        <!--{if $have_roles}--><!--{if $row.id|in_array:$have_roles}-->checked='checked'
+                                        <!--{/if}--><!--{/if}--> />
+                                    </td>
+                                    <td><!--{$row.role_name}--></td>
+                                    <td><!--{$row.role_desc}--></td>
+                                </tr>
+                                <!--{/foreach}-->
+                                <tr>
+                                    <td colspan="4">
+                                        <button type="button" class="btn btn-default" onclick="window.history.go(-1);">
+                                            取消
+                                        </button>
+                                        <button type="submit" class="btn btn-info center">提交
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                            </form>
+                           
+                      </div>
+                      <!-- /.tab-pane -->
+                      <div class="tab-pane" id="tab_2">
+                        <table id="example2" class="table  table-hover">
+                                <thead>
+                                <tr>
+                                    <th>角色名称</th>
+                                    <th>角色描述</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!--{foreach from=$role_list item=row}-->
+                                <!--{if $have_roles and $row.id|in_array:$have_roles}-->
+                                <tr>
+                                    <td><!--{$row.role_name}--></td>
+                                    <td><!--{$row.role_desc}--></td>
+                                    <td><a href="javascript:;" class="J_remove" data-id="<!--{$row.id}-->">移除</a></td>
+                                </tr>
+                                <!--{/if}-->
+                                <!--{/foreach}-->
+                                <tr>
+                                    <td colspan="3">
+                                        <button type="button" class="btn btn-default" onclick="window.history.go(-1);">
+                                            取消
+                                        </button>
+                                        <button type="button" onclick="role_form.submit()" class="btn btn-info center">提交
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                      </div>
+                     
+                    </div>
+                    <!-- /.tab-content -->
+                  </div>
+                  <!-- nav-tabs-custom -->
+                </div>
+                <!-- /.col -->
+        
+                
+        <!-- /.col -->
+      </div>
+    </section>
+</div>
+<!--{include file="common/main_footer.html"}-->
+<div class="control-sidebar-bg"></div>
+</div>
+</body>
+<script>
+$(".J_remove").click(function(){
+    var msg = "您真的确定要移除吗？\n\n请确认！";
+    if (confirm(msg) == true) {
+        var _this = this;
+        var role_id = $(_this).data('id');
+        $("input[name='role_ids[]'][value="+role_id+"]").prop("checked",false);
+        $(_this).parents("tr").remove();
+    } else {
+        return false;
+    }
+});
+</script>
+</html>
+

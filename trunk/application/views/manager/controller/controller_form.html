@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--{include file="common/head.html"}-->
+</head>
+<body class="hold-transition skin-green sidebar-mini">
+<div class="wrapper">
+
+    <!--{include file="common/main_header.html"}-->
+    <!-- Left side column. contains the logo and sidebar -->
+    <!--{include file="common/main_sidebar.html"}-->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                <!--{if $act == 'update' }-->修改<!--{else}-->添加<!--{/if}-->controller
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Horizontal Form -->
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">controller模块信息</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        <form class="form-horizontal" action="./<!--{$act}-->?controller_id=<!--{$controller_info.id}-->" method="post"
+                              onsubmit = "return validate_form('form')"  id="form" name="form">
+                            <div class="box-body">
+
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label">所属组件：</label>
+                                    <div class="col-sm-10">
+                                        <select class="fl form-control select2" style='width:300px;' name='compose_id' mod='isempty' msg="请选择组件!">
+                                            <option selected="selected">请选择</option>
+                                            <!--{foreach from=$compose_list key=compose_id item=compose_name}-->
+                                            <option value=<!--{$compose_id}--> <!--{if $compose_id==$controller_info.compose_id}-->selected<!--{/if}-->><!--{$compose_name}--></option>
+                                            <!--{/foreach}-->
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label">controller名称：</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" style="width:300px;" class="form-control w250" placeholder="" name='func_name' id='' value='<!--{$controller_info.func_name}-->' mod='isempty' msg="controller名称不能为空!">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">controller中文名称：</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" style="width:300px;" class="form-control" placeholder="" name='func_name_cn' id='' value='<!--{$controller_info.func_name_cn}-->'>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">排序：</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" style="width:300px;" class="form-control" name='orderid'
+                                               value='<!--{$controller_info.orderid|default:"0"}-->' mod='isempty' msg='排序字段不能为空'>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">图标:</label>
+
+                                    <div class="col-sm-10">
+                                            <input type="text" style="width:300px;" class="form-control" name='icon'
+                                                   value='<!--{$controller_info.icon}-->'>
+                                    </div>
+                                </div>
+
+
+                                <div class="box-footer">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label"></label>
+
+                                        <button type="button" class="btn btn-default" onclick="window.history.go(-1);">取消</button>
+                                        <button type="submit" class="btn btn-info center">提交</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <!--/.col (right) -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <!--{include file="common/main_footer.html"}-->
+    <!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+</body>
+</html>

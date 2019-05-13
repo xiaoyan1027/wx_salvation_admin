@@ -1,0 +1,66 @@
+<!--{include file="common/_inc_header.html"}-->
+<script type="text/javascript" src="/resources/bootstrap/js/index.js"></script>
+<title><!--{$smarty.const.SITE_NAME}--></title>
+
+</head>
+<body class="mainBody">
+<header>
+	<div class="header clearfix">
+    	<div class="fr">
+        	<span class="userInfo">
+            	欢迎您 <!--{$user_info.real_name}-->，
+            </span>
+            <a class="quit" target="_self" title="退出" href="/manager/login/logout"><span class="none">安全退出</span></a>
+            <a class="password" href="/manager/users/edit_passwd?user_id=<!--{$user_id}-->" target="mainFrame" title="修改密码"><span class="none">修改密码</span></a>
+        </div>
+        <div class="logo"></div>
+        <h1 class="fl"><!--{$smarty.const.SITE_NAME}--></h1>
+    </div>
+	<ul class="nav nav-tabs ejuMenu">
+	<!--{foreach from=$user_compose_list item=compose_info}-->
+		<li<!--{if $compose_info.id == $compose_id}-->  class="active" <!--{/if}-->>
+		<a href="/manager/index/index?compose_id=<!--{$compose_info.id}-->" target="_self"><!--{$compose_info.cn_name}--></a>
+		</li>
+	<!--{/foreach}-->
+    </ul>
+</header>
+<div class="main">
+	<div class="left">
+		<!--{foreach from=$menu_list item=controller}-->
+        <!--{if $controller.child_info}-->
+        <ul class="nav nav-pills nav-stacked leftNav">
+      		<li class="menu_header"><a href="javascript:void(0);"><!--{$controller.func_name_cn}--></a>
+      			<ul class="nav stacked submenu" style="display:none">
+      				<!--{foreach from=$controller.child_info item=method}-->
+	            	<li>
+	            		<a href="/<!--{$current_site}-->/<!--{$controller.func_name}-->/<!--{$method.func_name}-->" target='mainFrame'><!--{$method.func_name_cn}--></a>
+	            	</li>
+	                <!--{/foreach}-->
+
+	                <!--原样式-->
+	                <!--
+                	<li class="active"><a href="#"><span class="badge pull-right">42</span>管理员添加</a></li>
+                	 -->
+                	<!--原样式-->
+                </ul>
+      		</li>
+        </ul>
+        <!--{/if}-->
+        <!--{/foreach}-->
+    </div>
+
+    <div class="right">
+	    <div class="rightMain">
+
+                <iframe frameborder="0" id="mainFrame" name="mainFrame" src="/?site=manager&ctl=index&act=main" style="background: url("<!--{$base_images_path}-->/loading.gif") center no-repeat"></iframe>
+	    </div>
+    </div>
+</div>
+<!--
+<div class="footer">
+	<p><a href="#">关于我们</a> ┊ <a href="#">乐居版图</a> ┊ <a href="#">会员注册</a></p>
+    <p>Copyright © 1996-2014 SINA Corporation, All Rights Reserved</p>
+</div>
+ -->
+</body>
+</html>

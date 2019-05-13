@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--{include file="common/head.html"}-->
+</head>
+<body class="hold-transition skin-green sidebar-mini">
+<div class="wrapper">
+
+    <!--{include file="common/main_header.html"}-->
+    <!-- Left side column. contains the logo and sidebar -->
+    <!--{include file="common/main_sidebar.html"}-->
+
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                同步异常日志
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <div class="col-xs-22">
+                       
+
+                        <div class="box box-warning">
+                            <!--<div class="box-header">-->
+                            <!--<h3 class="box-title">Hover Data Table</h3>-->
+                            <!--</div>-->
+                            <div class="box-body">
+                                <table id="example2" class="table  table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>CRON类名</th>
+                                        <th>处理函数</th>
+                                        <th>参数</th>
+                                        <th>结果</th>
+                                        <th>发生时间</th>
+                                    </tr>
+                                    </thead>
+                                    <!--{foreach from=$log_list item=row}-->
+                                    <tr>
+                                        <td class="tc"><!--{$row.id}--></td>
+                                        <td class="tc"><!--{$row.class}--></td>
+                                        <td class="tc"><!--{$row.exec_fun}--></td>
+                                        <td><textarea style="width: 250px; height: 100px;"><!--{$row.params}--></textarea></td>
+                                        <td><textarea style="width: 250px; height: 100px;"><!--{$row.result}--></textarea></td>
+                                        <td><!--{$row.add_time|date_format:"%Y-%m-%d %H:%M:%S"}--></td>
+                                    </tr>
+                                    <!--{/foreach}-->
+                                    <tfoot>
+                                    <tr>
+                                        <th><!--{$pager_html}--></th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+    </div>
+    <!--{include file="common/main_footer.html"}-->
+    <div class="control-sidebar-bg"></div>
+</div>
+</body>
+</html>

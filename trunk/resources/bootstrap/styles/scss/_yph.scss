@@ -1,0 +1,14 @@
+// @import "../img";
+// @import "../font";
+// @mixin bgs($a,$b){
+// 	background-size:$a/2+px $b/2+px;
+// 	background: #f00;
+// 	width: 100px;
+// 	height: 100px;
+// }
+// @function Fem($a){
+// 	@return $a/14+em;
+// }
+// .bbs{ @include bgs(20,10);  font-size:20px; height:50px;}
+// .cc{ font-size: Fem(14);}
+// .cdd{ @extend %img1;}
