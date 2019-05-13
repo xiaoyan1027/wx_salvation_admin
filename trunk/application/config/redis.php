@@ -2,8 +2,10 @@
 
     $config['redis']['flexihash'] = false;
     //缓存配置,为主从配置
-    $redis_defult = explode(':', $_SERVER['SINASRV_REDIS_HOST']);
-    $redis_slave = explode(':', $_SERVER['SINASRV_REDIS_HOST_R']);
+//    $redis_defult = explode(':', $_SERVER['SINASRV_REDIS_HOST']);
+//    $redis_slave = explode(':', $_SERVER['SINASRV_REDIS_HOST_R']);
+    $redis_defult = '127.0.0.1';
+    $redis_slave = '6379';
     $config['redis_default']['host'] = $redis_defult[0]; // IP address or host
     $config['redis_default']['port'] = $redis_defult[1]; // Default Redis port is 6379
     $config['redis_default']['password'] = ''; // Can be left empty when the server does not require AUTH
