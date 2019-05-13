@@ -74,12 +74,12 @@ $active_group = 'default_r';
 $query_builder = TRUE;
 
 $db['default_r'] = array(
-	'dsn'	=> "mysql:host=127.0.0.1;port=3306;dbname=acf",
-	'hostname' => '127.0.0.1',
-   	'port'     => 3306 ,
-	'username' => 'root',
-	'password' => 'JiuZhuAiCongFeng.123',
-	'database' => 'acf',
+	'dsn'	=> "mysql:host={$_SERVER['SINASRV_DB_HOST_R']};port={$_SERVER['SINASRV_DB_PORT_R']};dbname={$_SERVER['SINASRV_DB_NAME_R']}",
+	'hostname' => $_SERVER['SINASRV_DB_HOST_R'],
+    'port'     => $_SERVER['SINASRV_DB_PORT_R'],
+	'username' => $_SERVER['SINASRV_DB_USER_R'],
+	'password' => $_SERVER['SINASRV_DB_PASS_R'],
+	'database' => $_SERVER['SINASRV_DB_NAME_R'],
 	'dbdriver' => 'pdo',
 	'dbprefix' => 'pet_',
 	'pconnect' => FALSE,
@@ -97,12 +97,12 @@ $db['default_r'] = array(
 );
 
 $db['default_w'] = array(
-	'dsn'	=> "mysql:host=127.0.0.1;port=3306;dbname=acf",
-	'hostname' => '127.0.0.1',
-   	'port'     => 3306 ,
-	'username' => 'root',
-	'password' => 'JiuZhuAiCongFeng.123',
-	'database' => 'acf',
+	'dsn'	=> "mysql:host={$_SERVER['SINASRV_DB_HOST']};port={$_SERVER['SINASRV_DB_PORT']};dbname={$_SERVER['SINASRV_DB_NAME']}",
+	'hostname' => $_SERVER['SINASRV_DB_HOST'],
+    'port'     => $_SERVER['SINASRV_DB_PORT'],
+	'username' => $_SERVER['SINASRV_DB_USER'],
+	'password' => $_SERVER['SINASRV_DB_PASS'],
+	'database' => $_SERVER['SINASRV_DB_NAME'],
 	'dbdriver' => 'pdo',
 	'dbprefix' => 'pet_',
 	'pconnect' => FALSE,
