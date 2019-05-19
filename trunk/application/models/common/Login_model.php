@@ -28,6 +28,7 @@ class Login_model extends BASE_Model {
      * @return boolean|Ambigous <multitype:, multitype:mixed string >
      */
     public function login($data) {
+        $data['passwd'] = md5($data['passwd']);
 
         $this->set_table('admin_users');
         $list = $this->fetch_row($data,'id,user_name,real_name,mobile');
